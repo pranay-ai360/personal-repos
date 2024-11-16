@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Columns Selection</title>
+</head>
+<body>
+    <h1>Select Columns and Data Types</h1>
+    <form action="/process" method="post">
+        {% for col, dtype in columns.items() %}
+            <div>
+                <label>{{ col }} ({{ dtype }})</label>
+                <select name="{{ col }}">
+                    <option value="">Select Type</option>
+                    <option value="string">String</option>
+                    <option value="int">Integer</option>
+                    <option value="float">Float</option>
+                    <option value="datetime">Datetime</option>
+                </select>
+            </div>
+        {% endfor %}
+        <button type="submit">Process</button>
+    </form>
+</body>
+</html>

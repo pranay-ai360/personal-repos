@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL Connection</title>
+</head>
+<body>
+    <h1>MySQL Connection Details</h1>
+    <form action="/process" method="post">
+        <label for="mysql_host">MySQL Host:</label>
+        <input type="text" name="mysql_host" required><br>
+
+        <label for="mysql_database">Database Name:</label>
+        <input type="text" name="mysql_database" required><br>
+
+        <label for="mysql_port">Port:</label>
+        <input type="number" name="mysql_port" value="3306" required><br>
+
+        <label for="mysql_username">Username:</label>
+        <input type="text" name="mysql_username" required><br>
+
+        <label for="mysql_password">Password:</label>
+        <input type="password" name="mysql_password" required><br>
+
+        <button type="submit">Test Connection</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
