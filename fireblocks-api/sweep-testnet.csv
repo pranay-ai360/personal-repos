@@ -1,0 +1,3 @@
+﻿globalEnable,assetID,feeAssetID,assetType,fireblocksOmnibusThreshold,anyVautAbove,coinbaseOmnibusThreshold,lowfeeAnyVaultAbove,lowfeeSweepEnabled
+TRUE,USDC_ETH_TEST5_0GER,ETH_TEST5,cryptoToken,10000,0.1,10000,1000,TRUE
+FALSE,ETH_TEST5,ETH_TEST5,cryptoCoin,,,,,
