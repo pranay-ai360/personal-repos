@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+!.venv/lib/*.*
+/flask-compareFiles/.venv/lib
+/flask-compareFiles/.venv/bin
+/flask-compareFiles/__pycache__
+/scrappy/.venv
+clickhouse-metabase/.venv/
+/usdc_emails/USDC_incorrect_price_clawback_latest.xlsx
+/usdc_emails/USDC_incorrect_price_clawback_usingSell_latest.xlsx
+/Analytics/pgadmin4.db
+cloudflare/python/cloudflare-env/*
+cloudflare/ts/node_modules/*
+dataload/venv/*
+expressjs/node_modules/*
+dataload/uploads
