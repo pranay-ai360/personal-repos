@@ -17,3 +17,4 @@ dataload/uploads
 *.csv
 clickhouse-metabase/plugins/
 ch-and-minio-S3/plugins/
+clickhouse/plugins/
