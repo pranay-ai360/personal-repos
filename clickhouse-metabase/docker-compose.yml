@@ -1,0 +1,83 @@
+version: '3.8'
+services:
+  clickhouse:
+    container_name: clickhouse-server
+    image: clickhouse/clickhouse-server:latest
+    ports:
+      - "8123:8123" # HTTP interface
+      - "9000:9000" # Native client interface
+
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse # Persist data
+      # - ./etc/clickhouse-server/config.xml:/etc/clickhouse-server/config.xml # Custom configuration
+      - ./etc/clickhouse-server/users.xml:/etc/clickhouse-server/users.xml # Custom users configuration
+      - ./import/:/import/
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    environment:
+      TZ: 'UTC' # Optional: Set the timezone
+    restart: unless-stopped
+    networks:
+      - my_app_network
+
+
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    hostname: metabase
+    volumes:
+      - /dev/urandom:/dev/random:ro
+      - ./plugins:/plugins # Add this line, replace /path/to/plugins with the actual path
+    ports:
+      - 3000:3000
+    networks:
+      - my_app_network
+
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabaseappdb
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabase
+      MB_DB_PASS: mysecretpassword
+      MB_DB_HOST: postgres
+
+      # MB_DB_TYPE: postgres
+      # MB_DB_DBNAME: metabase-local-pc
+      # MB_DB_PORT: 25060
+      # MB_DB_USER: doadmin
+      # MB_DB_PASS: 
+      # MB_DB_HOST: postgres-cluster-do-user-12892822-0.c.db.ondigitalocean.com
+
+    healthcheck:
+      test: curl --fail -I http://localhost:3000/api/health || exit 1
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+# Networks definition remains the same
+
+  postgres:
+    image: postgres:latest
+    hostname: postgres
+    environment:
+      POSTGRES_USER: metabase
+      POSTGRES_DB: metabaseappdb
+      POSTGRES_PASSWORD: mysecretpassword
+    ports: 
+      - '5432:5432'
+    networks:
+      - my_app_network
+
+#     volumes: 
+#       - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+
+volumes:
+  clickhouse_data:
+
+networks:
+  my_app_network:
+    driver: bridge

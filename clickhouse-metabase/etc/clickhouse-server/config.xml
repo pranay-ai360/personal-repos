@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<yandex>
+    <!-- Network settings -->
+    <listen_host>::</listen_host>
+    <listen_host>0.0.0.0</listen_host>
+
+    <!-- HTTP interface settings -->
+    <http_port>8123</http_port>
+
+    <!-- TCP interface settings for the native ClickHouse client -->
+    <tcp_port>9000</tcp_port>
+
+    <!-- Directory for data storage -->
+    <path>/var/lib/clickhouse/</path>
+
+    <!-- Logger settings -->
+    <logger>
+        <level>trace</level>
+        <console>true</console>
+        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <size>1000M</size>
+        <count>10</count>
+    </logger>
+
+    <!-- Other configurations can be added below -->
+</yandex>
