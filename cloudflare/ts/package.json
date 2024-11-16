@@ -1,0 +1,19 @@
+{
+    "name": "cloudflare-dns-cleaner",
+    "version": "1.0.0",
+    "description": "A script to remove all DNS records from a Cloudflare zone",
+    "main": "index.ts",
+    "scripts": {
+        "start": "ts-node index.ts"
+    },
+    "dependencies": {
+        "cloudflare": "^3.5.0",
+        "node-fetch": "^3.3.0"
+    },
+    "devDependencies": {
+        "ts-node": "^10.9.0",
+        "typescript": "^5.0.0"
+    },
+    "author": "Your Name",
+    "license": "MIT"
+}
