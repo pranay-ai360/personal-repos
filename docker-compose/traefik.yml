@@ -1,0 +1,20 @@
+api:
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  docker:
+    exposedByDefault: false
+  file:
+    directory: /etc/traefik/
+    watch: true
+
+tls:
+  certificates:
+    - certFile: "/certs/certificate.crt"
+      keyFile: "/certs/private.key"
