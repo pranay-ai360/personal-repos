@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asset Transfer</title>
+</head>
+<body>
+    <h2>Asset Transfer Form</h2>
+    <form id="assetForm">
+        <label for="AssetID">Asset ID:</label><br>
+        <input type="text" id="AssetID" name="AssetID" required><br>
+        <label for="FeeAssetID">Fee Asset ID:</label><br>
+        <input type="text" id="FeeAssetID" name="FeeAssetID" required><br>
+        <label for="threshold">Threshold:</label><br>
+        <input type="text" id="threshold" name="threshold" required><br>
+        <label for="anyvaultAbove">Any Vault Above:</label><br>
+        <input type="text" id="anyvaultAbove" name="anyvaultAbove" required><br>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    <button onclick="terminateProcess()">Terminate Process</button>
+    <pre id="log"></pre>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('assetForm');
+            const formData = new FormData(form);
+            fetch('/submit', { method: 'POST', body: formData })
+                .then(() => listenForLogs())
+                .catch((error) => console.error('Error:', error));
+        }
+
+        function listenForLogs() {
+            const logElement = document.getElementById('log');
+            const evtSource = new EventSource('/events');
+            evtSource.onmessage = function(event) {
+                logElement.textContent += event.data + '\n';
+            };
+            evtSource.onerror = function() {
+                evtSource.close();
+            };
+        }
+
+        function terminateProcess() {
+            fetch('/terminate', { method: 'POST' })
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch((error) => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
