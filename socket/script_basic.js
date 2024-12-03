@@ -23,7 +23,6 @@ const CB_ACCESS_PASSPHRASE = 'akmwnltyfgb'; // Correct passphrase as a string
 const CB_ACCESS_SECRET = 'P8npGsgqjYbgeI7chrkVNHxASkL44hEIUyizOzVBvn7lzjeGhrGnZl3X+wgPb81S01Gg6+VTNlsa8+mIrz4YKw=='; // Correct secret as a string
 const CB_ACCESS_KEY = '24ab46f784d1b20db435b852086e3250'; // Correct key as a string
 const WS_URL = 'wss://ws-direct.sandbox.exchange.coinbase.com'; // WebSocket URL for Coinbase Pro
-
 const product_ids = ["BTC-USD", "ETH-USD", "ETH-EUR"]; // Product IDs to subscribe
 const channels = ["level2"]; // Channels to subscribe
 
