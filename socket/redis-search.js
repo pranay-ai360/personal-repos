@@ -1,47 +1,68 @@
 const Redis = require('ioredis');
-const redis = new Redis('redis://127.0.0.1:6379'); // Connecting to Redis server
+const redis = new Redis({
+  host: '127.0.0.1',  // Ensure this matches your Redis server configuration
+  port: 6379,
+  connectTimeout: 10000, // Adjust timeout value if necessary
+});
+
+redis.on('connect', () => {
+  console.log('Connected to Redis server');
+});
+
+redis.on('close', () => {
+  console.log('Redis connection closed');
+});
+
+redis.on('error', (err) => {
+  console.error('Redis error:', err);
+});
 
 const pair = 'BTC-USD';  // The trading pair
 const side = 'ask';      // Side is 'ask'
 const totalQuantity = 0.005;  // The target total quantity
 
-// Searching for keys with the pair and side 'ask'
-redis.keys(`${pair}:${side}:*`).then((keys) => {
-  // Fetch all ask orders and store them
-  const askDataPromises = keys.map(async (key) => {
-    const result = await redis.get(key);
-    const parsedResult = JSON.parse(result);
-    parsedResult.key = key;  // Include the key for debugging/logging purposes
-    return parsedResult;
-  });
+// Aggregation using FT.AGGREGATE for BTC-USD ask orders
+const aggregateData = async () => {
+  try {
+    // Perform aggregation query
+    const result = await redis.call('FT.AGGREGATE', 'idx', // 'idx' is your index name
+      `*=>[TAG side:${side}]`,     // Filter by side (ask)
+      'GROUPBY', '1', '@side',    // Group by the 'side' field
+      'REDUCE', 'SUM', '2', '@quantity', // Sum the 'quantity' field
+      'REDUCE', 'AVG', '1', '@price' // Calculate the average 'price' field
+    );
 
-  // Once all data is fetched, sort by price (lowest to highest)
-  Promise.all(askDataPromises).then((askData) => {
-    const sortedAskData = askData.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-
+    // Process the result
+    console.log('Aggregated Data:', result);
+    
+    // Calculate total price and quantity
     let accumulatedQuantity = 0;
     let accumulatedPrice = 0;
-    let responsePrice = 0;
-
-    // Accumulate until totalQuantity is met or exceeded
-    sortedAskData.forEach((order) => {
-      if (accumulatedQuantity < totalQuantity) {
-        const availableQuantity = parseFloat(order.quantity);
-        accumulatedQuantity += availableQuantity;
-        accumulatedPrice += availableQuantity * parseFloat(order.unitPrice);
-        responsePrice = accumulatedPrice;
-      }
+    
+    // Loop through the result and calculate accumulated values
+    result.forEach((row) => {
+      const quantity = parseFloat(row['SUM(@quantity)']);
+      const price = parseFloat(row['AVG(@price)']);
+      accumulatedQuantity += quantity;
+      accumulatedPrice += price * quantity;
     });
 
-    // Log the response object
+    // Response object
+    const responsePrice = accumulatedPrice;
     console.log({
       requestPair: pair,
       requestSide: side,
       requestTotalQuantity: totalQuantity,
-      responsePrice: responsePrice
+      responsePrice: responsePrice,
     });
-  });
-});
 
-// Close the connection
-redis.quit();
+  } catch (error) {
+    console.error('Error performing aggregation:', error);
+  }
+};
+
+// Run the aggregation
+aggregateData().finally(() => {
+  // Close the Redis connection after the operation is complete
+  redis.disconnect();
+});
