@@ -1,14 +1,25 @@
 const WebSocket = require('ws');
 const crypto = require('crypto');
+const redis = require('redis');
 
 // Add REDIS_URL constant
 const REDIS_URL = '127.0.0.1:6379'; // Redis URL for your Redis instance
 
-// Assign proper values to the constants
+// Redis client setup
+const client = redis.createClient({
+    url: `redis://${REDIS_URL}`
+});
+
+client.connect();
+
 const CB_ACCESS_PASSPHRASE = 'akmwnltyfgb'; // Correct passphrase as a string
 const CB_ACCESS_SECRET = 'P8npGsgqjYbgeI7chrkVNHxASkL44hEIUyizOzVBvn7lzjeGhrGnZl3X+wgPb81S01Gg6+VTNlsa8+mIrz4YKw=='; // Correct secret as a string
 const CB_ACCESS_KEY = '24ab46f784d1b20db435b852086e3250'; // Correct key as a string
 const WS_URL = 'wss://ws-direct.sandbox.exchange.coinbase.com'; // Fixed the extra space in the URL
+
+const product_ids = ["BTC-USD", "ETH-USD", "ETH-EUR"]; // Add product IDs to subscribe
+
+const channels = ["level2", "heartbeat"]; // Fixed channel subscription
 
 function getSignature(timestamp, method, requestPath, body, secret) {
     const prehash = `${timestamp}${method}${requestPath}${body}`;
@@ -35,15 +46,8 @@ function connect() {
             key: CB_ACCESS_KEY,
             passphrase: CB_ACCESS_PASSPHRASE,
             timestamp: timestamp,
-            product_ids: ["BTC-USD", "ETH-USD", "ETH-EUR"], // Add product IDs to subscribe
-            channels: [
-                "level2", // Subscribe to level2 channel
-                "heartbeat", // Subscribe to heartbeat channel
-                {
-                    name: "ticker", // Subscribe to ticker channel for specific products
-                    product_ids: ["BTC-USD", "ETH-BTC", "ETH-USD"]
-                }
-            ]
+            product_ids: product_ids,
+            channels: channels
         };
 
         // Send the subscription message after authentication
@@ -58,6 +62,37 @@ function connect() {
         try {
             const parsedMessage = JSON.parse(messageString);
             console.log('Message from server:', parsedMessage);
+
+            // Only handle snapshot type messages
+            if (parsedMessage.type === 'snapshot') {
+                const { product_id, asks, bids } = parsedMessage;
+
+                // Process "asks"
+                asks.forEach(([price, quantity]) => {
+                    const askData = {
+                        product_id,
+                        side: 'asks',
+                        price,
+                        quantity
+                    };
+                    // Store in Redis under "asks" category
+                    client.hSet(`orderbook:${product_id}:asks`, price, JSON.stringify(askData));
+                });
+
+                // Process "bids"
+                bids.forEach(([price, quantity]) => {
+                    const bidData = {
+                        product_id,
+                        side: 'bids',
+                        price,
+                        quantity
+                    };
+                    // Store in Redis under "bids" category
+                    client.hSet(`orderbook:${product_id}:bids`, price, JSON.stringify(bidData));
+                });
+
+                console.log('Orderbook data stored in Redis');
+            }
         } catch (error) {
             console.error('Error parsing message:', error);
         }
