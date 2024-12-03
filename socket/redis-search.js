@@ -25,8 +25,7 @@ const totalQuantity = 0.005;  // The target total quantity
 const aggregateData = async () => {
   try {
     // Perform aggregation query
-    const result = await redis.call('FT.AGGREGATE', 'idx', // 'idx' is your index name
-      `*=>[TAG side:${side}]`,     // Filter by side (ask)
+    const result = await redis.call('FT.AGGREGATE', 'product:BTC-USD:ask:index', // 'idx' is your index name
       'GROUPBY', '1', '@side',    // Group by the 'side' field
       'REDUCE', 'SUM', '2', '@quantity', // Sum the 'quantity' field
       'REDUCE', 'AVG', '1', '@price' // Calculate the average 'price' field
