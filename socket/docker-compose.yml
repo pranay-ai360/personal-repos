@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: express_app
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - ENVIRONMENT=sandbox
+#       - REDIS_URL=redis://redis:6379/0
+#       - PORT=3000
+#       - CB_ACCESS_KEY=your_api_key
+#       - CB_ACCESS_SECRET=your_api_secret
+#       - CB_ACCESS_PASSPHRASE=your_passphrase
+#     depends_on:
+#       - redis
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#  #   command: pm2 start script.js --name script.js
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
