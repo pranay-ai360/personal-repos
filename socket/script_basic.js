@@ -27,11 +27,6 @@ const WS_URL = 'wss://ws-direct.sandbox.exchange.coinbase.com'; // WebSocket URL
 const product_ids = ["BTC-USD", "ETH-USD", "ETH-EUR"]; // Product IDs to subscribe
 const channels = ["level2"]; // Channels to subscribe
 
-// PRANAY comment const base_currency_pricison = 0.000000001
-// PRANAY comment const quote_currency_pricison = 0.01
-
-const phpusd_rate = 58.0001; // PRANAY comment for the rate of PHP to USD
-
 function getSignature(timestamp, method, requestPath, body, secret) {
     const prehash = `${timestamp}${method}${requestPath}${body}`;
     const key = Buffer.from(secret, 'base64');
@@ -57,18 +52,16 @@ async function createIndexesIfNotExists(productId) {
             await client.ft.create(bidIndexKey, {
                 product_id: { type: 'TEXT' },
                 side: { type: 'TEXT' },
-                price_in_quote_currency: { type: 'NUMERIC', sortable: true }, // Price in quote currency (USD or EUR)
-                quantity_in_quote_currency: { type: 'NUMERIC', sortable: true }, // Quantity in quote currency
-                price_in_base_currency: { type: 'NUMERIC', sortable: true } // Price in base currency (converted price)
+                price: { type: 'NUMERIC', sortable: true }, // Add 'sortable' to price field
+                quantity: { type: 'NUMERIC', sortable: true } // Add 'sortable' to quantity field
             });
 
             // Create ask index
             await client.ft.create(askIndexKey, {
                 product_id: { type: 'TEXT' },
                 side: { type: 'TEXT' },
-                price_in_quote_currency: { type: 'NUMERIC', sortable: true }, // Price in quote currency
-                quantity_in_quote_currency: { type: 'NUMERIC', sortable: true }, // Quantity in quote currency
-                price_in_base_currency: { type: 'NUMERIC', sortable: true } // Price in base currency
+                price: { type: 'NUMERIC', sortable: true }, // Add 'sortable' to price field
+                quantity: { type: 'NUMERIC', sortable: true } // Add 'sortable' to quantity field
             });
 
             console.log(`Bid index and Ask index for ${productId} created successfully.`);
@@ -79,6 +72,18 @@ async function createIndexesIfNotExists(productId) {
         return false;
     }
 }
+
+async function validateSearchQuery() {
+    try {
+        // Run the FT.SEARCH query to validate it works
+        const result = await client.ft.search('product:BTC-USD:ask:index', '@price:[0 1000000000] @quantity:[1 10000000]');
+        console.log('FT.SEARCH query successful:', result);
+    } catch (err) {
+        console.error('Error executing FT.SEARCH query:', err);
+    }
+}
+
+
 
 async function connect() {
     const ws = new WebSocket(WS_URL);
@@ -126,28 +131,21 @@ async function connect() {
             }
 
             asks.forEach(async (ask) => {
-                const price_in_quote_currency = ask[0]; // Price in quote currency (USD/EUR)
-                const quantity_in_quote_currency = ask[1]; // Quantity in quote currency
-
-                // Calculate price in base currency (multiplied by the PHP to USD rate)
-                const price_in_base_currency = price_in_quote_currency / phpusd_rate;
-
                 const formattedMessage = {
                     product_id: productId,
                     side: 'ask',  // For snapshot data, side is 'ask'
-                    price_in_quote_currency: price_in_quote_currency,
-                    quantity_in_quote_currency: quantity_in_quote_currency,
-                    price_in_base_currency: price_in_base_currency // Add price in base currency
+                    price: ask[0],  // price is the first element in the array
+                    quantity: ask[1]  // quantity is the second element in the array
                 };
 
                 // Log the formatted message
                 console.log(JSON.stringify(formattedMessage, null, 2));
 
                 // Store in Redis under "asks" category, storing raw JSON objects directly
-                const key = `${productId}:ask:${price_in_quote_currency}`;
+                const key = `${productId}:ask:${ask[0]}`;
 
                 // Add the key to the ask index set
-                const askIndexKey = `${productId}:ask`; // PRANAY comment: do not add prefix "product" and suffix "index"
+                const askIndexKey = `product:${productId}:ask:index`;
                 client.sAdd(askIndexKey, key)
                     .then(() => {
                         console.log(`Added ${key} to ask index ${askIndexKey}`);
@@ -159,6 +157,8 @@ async function connect() {
                 client.hSet(key, formattedMessage)
                     .then(() => {
                         console.log(`Stored in Redis with key: ${key}`);
+                        // Run validations after storing data in Redis
+                        // validateSearchQuery();
                     })
                     .catch(err => {
                         console.error('Error storing in Redis:', err);
@@ -183,24 +183,19 @@ async function connect() {
                 const price = change[1]; // Price
                 const quantity = change[2]; // Quantity
 
-                // Calculate the price and quantity based on the new schema
+                // Assign 'bid' if 'buy' or 'ask' if 'sell'
                 const formattedSide = side === 'buy' ? 'bid' : (side === 'sell' ? 'ask' : side);
 
-                const price_in_base_currency = price / phpusd_rate;
-                const price_in_quote_currency = price;
-                const quantity_in_quote_currency = quantity;
-
                 // Only update if quantity is non-zero
-                if (parseFloat(quantity_in_quote_currency) > 0) {
-                    const key = `${productId}:${formattedSide}:${price_in_quote_currency}`;
+                if (parseFloat(quantity) > 0) {
+                    const key = `${productId}:${formattedSide}:${price}:`;
 
                     // Prepare the data to store (with the updated quantity)
                     const formattedMessage = {
                         product_id: productId,
-                        side: formattedSide,
-                        price_in_quote_currency: price_in_quote_currency,
-                        quantity_in_quote_currency: quantity_in_quote_currency,
-                        price_in_base_currency: price_in_base_currency
+                        side: formattedSide,  // Updated side to 'bid' or 'ask'
+                        price: price,
+                        quantity: quantity
                     };
 
                     // Check if the key already exists in Redis
@@ -212,7 +207,9 @@ async function connect() {
                                 client.hSet(key, formattedMessage)
                                     .then(() => {
                                         console.log(`Updated quantity for ${key}`);
-                                    })
+                                        // Run validations after updating data in Redis
+                                        // validateSearchQuery();
+                                                    })
                                     .catch(err => {
                                         console.error('Error updating Redis:', err);
                                     });
@@ -222,14 +219,16 @@ async function connect() {
                                 client.hSet(key, formattedMessage)
                                     .then(() => {
                                         console.log(`Created new key for ${key}`);
-                                    })
+                                        // Run validations after creating data in Redis
+                                        //validateSearchQuery();
+                                                    })
                                     .catch(err => {
                                         console.error('Error creating Redis key:', err);
                                     });
                             }
 
                             // Add the updated key to the appropriate index set
-                            const indexKey = `${productId}:${formattedSide}`; // PRANAY comment: do not add prefix "product" and suffix "index"
+                            const indexKey = `product:${productId}:${formattedSide}:index`;
                             client.sAdd(indexKey, key)
                                 .then(() => {
                                     console.log(`Added ${key} to ${formattedSide} index ${indexKey}`);
@@ -242,7 +241,7 @@ async function connect() {
                             console.error('Error checking Redis key existence:', err);
                         });
                 } else {
-                    console.log(`Skipping update for ${formattedSide} at ${price_in_quote_currency} with quantity ${quantity_in_quote_currency}`);
+                    console.log(`Skipping update for ${formattedSide} at ${price} with quantity ${quantity}`);
                 }
             });
         }
