@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: POSTGRESUSER
+      POSTGRES_DB: POSTGRESDB
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
