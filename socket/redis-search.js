@@ -7,8 +7,6 @@ const totalQuantity = 0.005;  // The target total quantity
 
 // Searching for keys with the pair and side 'ask'
 redis.keys(`${pair}:${side}:*`).then((keys) => {
-  console.log('Ask keys:', keys);
-
   // Fetch all ask orders and store them
   const askDataPromises = keys.map(async (key) => {
     const result = await redis.get(key);
@@ -35,7 +33,8 @@ redis.keys(`${pair}:${side}:*`).then((keys) => {
       }
     });
 
-    console.log('Response:', {
+    // Log the response object
+    console.log({
       requestPair: pair,
       requestSide: side,
       requestTotalQuantity: totalQuantity,
