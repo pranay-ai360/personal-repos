@@ -18,3 +18,4 @@ dataload/uploads
 clickhouse-metabase/plugins/
 ch-and-minio-S3/plugins/
 clickhouse/plugins/
+socket/node_modules
