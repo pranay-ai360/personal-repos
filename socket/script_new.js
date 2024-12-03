@@ -27,7 +27,11 @@ const WS_URL = 'wss://ws-direct.sandbox.exchange.coinbase.com'; // Fixed the ext
 
 const product_ids = ["BTC-USD", "ETH-USD", "ETH-EUR"]; // Add product IDs to subscribe
 
-const channels = ["level2", "heartbeat"]; // Fixed channel subscription
+const channels = ["level2"]; // Fixed channel subscription
+
+// Define the minimum unit quantity for BTC-USD
+const UNIT_QUANTITY = 0.0000001; // Minimum BTC-USD quantity
+const MAX_SEQUENCE = 1000000000000; // Just an arbitrary limit for the number of sequences
 
 function getSignature(timestamp, method, requestPath, body, secret) {
     const prehash = `${timestamp}${method}${requestPath}${body}`;
@@ -76,53 +80,53 @@ function connect() {
 
             changes.forEach(change => {
                 const side = change[0]; // 'buy' or 'sell'
-                const price = change[1]; // Price
-                const quantity = change[2]; // Quantity
+                const price = parseFloat(change[1]); // Price
+                let quantity = parseFloat(change[2]); // Quantity
 
                 // Assign 'bid' if 'buy' or 'ask' if 'sell'
                 const formattedSide = side === 'buy' ? 'bid' : (side === 'sell' ? 'ask' : side);
 
-                // Only update if quantity is non-zero
-                if (parseFloat(quantity) > 0) {
-                    // Construct the Redis key based on product_id and timestamp (e.g., BTC-USD:2024-12-03T08:27:22.665495Z)
-                    const key = `${productId}:${side}:${price}`;
+                // Only process if quantity is greater than or equal to the minimum unit
+                if (quantity >= UNIT_QUANTITY) {
+                    // Construct the Redis key based on product_id, side, price, and timestamp
+                    let sequence = 1;
+                    let remainingQuantity = quantity;
 
-                    // Prepare the data to store (with the updated quantity)
-                    const formattedMessage = {
-                        product_id: productId,
-                        side: formattedSide,  // Updated side to 'bid' or 'ask'
-                        price: price,
-                        quantity: quantity
-                    };
+                    // Process by breaking the quantity into unit quantities and updating Redis
+                    while (remainingQuantity >= UNIT_QUANTITY) {
+                        const key = `${productId}:${formattedSide}:${price}:${sequence}`;
 
-                    // Check if the key already exists
-                    client.exists(key)
-                        .then((exists) => {
-                            if (exists) {
-                                // Update the quantity if the key exists
-                                console.log(`Updating Redis key: ${key}`);
-                                client.hSet(key, formattedMessage)
-                                    .then(() => {
-                                        console.log(`Updated quantity for ${key}`);
-                                    })
-                                    .catch(err => {
-                                        console.error('Error updating Redis:', err);
-                                    });
-                            } else {
-                                // Create a new key-value pair if it doesn't exist
-                                console.log(`Creating Redis key: ${key}`);
-                                client.hSet(key, formattedMessage)
-                                    .then(() => {
-                                        console.log(`Created new key for ${key}`);
-                                    })
-                                    .catch(err => {
-                                        console.error('Error creating Redis key:', err);
-                                    });
-                            }
-                        })
-                        .catch(err => {
-                            console.error('Error checking Redis key existence:', err);
-                        });
+                        // Calculate unitPrice as (price / quantity) * UNIT_QUANTITY
+                        const unitPrice = ((price / quantity) * UNIT_QUANTITY).toFixed(7);
+
+                        const formattedMessage = {
+                            product_id: productId,
+                            side: formattedSide,  // 'bid' or 'ask'
+                            quantity: UNIT_QUANTITY.toFixed(7),
+                            price: price.toFixed(2),
+                            unitQuantity: UNIT_QUANTITY.toFixed(7),  // Minimum quantity used for each entry
+                            unitPrice: unitPrice  // Unit price calculation
+                        };
+
+                        // Store in Redis under "productId:side:price:sequence"
+                        client.hSet(key, formattedMessage)
+                            .then(() => {
+                                console.log(`Stored in Redis with key: ${key}`);
+                            })
+                            .catch(err => {
+                                console.error('Error storing in Redis:', err);
+                            });
+
+                        // Update remaining quantity and increment sequence
+                        remainingQuantity -= UNIT_QUANTITY;
+                        sequence += 1;
+
+                        // Limit sequence to avoid infinite loops (use appropriate logic based on your needs)
+                        if (sequence > MAX_SEQUENCE) {
+                            console.log('Reached max sequence, stopping.');
+                            break;
+                        }
+                    }
                 } else {
                     console.log(`Skipping update for ${side} at ${price} with quantity ${quantity}`);
                 }

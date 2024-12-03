@@ -1,21 +1,46 @@
 const Redis = require('ioredis');
 const redis = new Redis('redis://127.0.0.1:6379'); // Connecting to Redis server
 
-// Set some key-value pairs
-redis.set('user:1', JSON.stringify({ name: 'Alice', age: 30 }));
-redis.set('user:2', JSON.stringify({ name: 'Bob', age: 25 }));
+const pair = 'BTC-USD';  // The trading pair
+const side = 'ask';      // Side is 'ask'
+const totalQuantity = 0.005;  // The target total quantity
 
-// Get a value by key
-redis.get('user:1').then((result) => {
-  console.log('User 1:', JSON.parse(result)); // Output the parsed result
-});
+// Searching for keys with the pair and side 'ask'
+redis.keys(`${pair}:${side}:*`).then((keys) => {
+  console.log('Ask keys:', keys);
 
-// Searching for keys
-redis.keys('user:*').then((keys) => {
-  console.log('User keys:', keys);
-  keys.forEach(async (key) => {
-    const user = await redis.get(key);
-    console.log(`User ${key}:`, JSON.parse(user));
+  // Fetch all ask orders and store them
+  const askDataPromises = keys.map(async (key) => {
+    const result = await redis.get(key);
+    const parsedResult = JSON.parse(result);
+    parsedResult.key = key;  // Include the key for debugging/logging purposes
+    return parsedResult;
+  });
+
+  // Once all data is fetched, sort by price (lowest to highest)
+  Promise.all(askDataPromises).then((askData) => {
+    const sortedAskData = askData.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+
+    let accumulatedQuantity = 0;
+    let accumulatedPrice = 0;
+    let responsePrice = 0;
+
+    // Accumulate until totalQuantity is met or exceeded
+    sortedAskData.forEach((order) => {
+      if (accumulatedQuantity < totalQuantity) {
+        const availableQuantity = parseFloat(order.quantity);
+        accumulatedQuantity += availableQuantity;
+        accumulatedPrice += availableQuantity * parseFloat(order.unitPrice);
+        responsePrice = accumulatedPrice;
+      }
+    });
+
+    console.log('Response:', {
+      requestPair: pair,
+      requestSide: side,
+      requestTotalQuantity: totalQuantity,
+      responsePrice: responsePrice
+    });
   });
 });
 
