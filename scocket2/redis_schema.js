@@ -5,7 +5,6 @@ async function createIndexesIfNotExists(productId) {
     try {
         // Fetch the list of existing indexes
         const indexes = await client.ft._list();
-
         const bidIndexKey = `${productId}:bid`;
         const askIndexKey = `${productId}:ask`;
 

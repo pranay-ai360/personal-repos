@@ -1,4 +1,5 @@
 const { client } = require('./redis_connection'); // Ensure correct import of client
+const { createIndexesIfNotExists } = require('./redis_schema'); // Import the function to create indexes
 
 class RedisHandler {
     constructor() {
@@ -35,6 +36,9 @@ class RedisHandler {
         const asks = parsedMessage.asks;
         const bids = parsedMessage.bids;
 
+        // Call the createIndexesIfNotExists function for the given productId
+        await createIndexesIfNotExists(productId);  // Ensure indexes are created before storing data
+
         // Process and store asks
         for (let ask of asks) {
             const price = ask[0];
@@ -70,6 +74,9 @@ class RedisHandler {
     async handleL2Update(parsedMessage) {
         const productId = parsedMessage.product_id;
         const changes = parsedMessage.changes;
+
+        // Call the createIndexesIfNotExists function for the given productId
+        await createIndexesIfNotExists(productId);  // Ensure indexes are created before updating data
 
         // Process each change (either 'buy' or 'sell')
         for (let change of changes) {
