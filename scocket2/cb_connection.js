@@ -1,8 +1,11 @@
 const WebSocket = require('ws');
-const { getSignature } = require('./redis_connection');  // Import getSignature function from redis_connection.js
+const { getSignature } = require('./redis_connection'); // Import getSignature from redis_connection.js
+const RedisHandler = require('./redis_handler'); // Import the RedisHandler class
 
-const product_ids = ["BTC-USD", "ETH-USD", "ETH-EUR"]; // Product IDs to subscribe
+const product_ids = ["BTC-USD", "ETH-USD", "ETH-EUR"];
 const channels = ["level2"]; // Channels to subscribe
+
+const redisHandler = new RedisHandler(); // Instantiate RedisHandler
 
 // Function to connect to WebSocket and subscribe to Coinbase channels
 function connectToWebSocket() {
@@ -35,8 +38,10 @@ function connectToWebSocket() {
         const parsedMessage = JSON.parse(message.toString());
         console.log('Received message:', parsedMessage);
 
-        // The actual message handling will now be in script.js
-        // You can call the handleMessage function from script.js here
+        // Call the message handling function
+        handleMessage(parsedMessage).catch(err => {
+            console.error('Error handling message:', err);
+        });
     });
 
     ws.on('error', (error) => {
@@ -46,6 +51,17 @@ function connectToWebSocket() {
     ws.on('close', (code, reason) => {
         console.log(`WebSocket connection closed: ${code} - ${reason}`);
     });
+}
+
+// Handle the WebSocket message
+async function handleMessage(parsedMessage) {
+    if (parsedMessage.type === 'snapshot' && parsedMessage.product_id && parsedMessage.asks) {
+        await redisHandler.storeWebSocketMessage(parsedMessage);
+    }
+
+    if (parsedMessage.type === 'l2update' && parsedMessage.product_id && parsedMessage.changes) {
+        await redisHandler.handleL2Update(parsedMessage);
+    }
 }
 
 // Export the connectToWebSocket function

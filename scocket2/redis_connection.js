@@ -1,23 +1,24 @@
 const redis = require('redis');
 const crypto = require('crypto');
-
-// Redis URL constant
-const REDIS_URL = '127.0.0.1:6379'; // Redis URL for your Redis instance
+const { promisify } = require('util');
 
 // Redis client setup
+const REDIS_URL = '127.0.0.1:6379'; // Redis URL for your Redis instance
 const client = redis.createClient({
     url: `redis://${REDIS_URL}`
 });
 
-// Function to check if Redis is reachable
-async function checkRedisConnection() {
-    try {
-        await client.connect();
+client.connect()
+    .then(() => {
         console.log('Connected to Redis');
-    } catch (err) {
+    })
+    .catch(err => {
         console.error('Error connecting to Redis:', err);
-    }
-}
+    });
+
+// Promisify Redis commands for better async handling
+const hSetAsync = promisify(client.hSet).bind(client);
+const existsAsync = promisify(client.exists).bind(client);
 
 // Signature function
 function getSignature(timestamp, method, requestPath, body, secret) {
@@ -26,61 +27,31 @@ function getSignature(timestamp, method, requestPath, body, secret) {
     return crypto.createHmac('sha256', key).update(prehash).digest('base64');
 }
 
-// Create Redis index if not exists
-async function createIndexesIfNotExists(productId) {
+// Function to check Redis key existence
+async function checkRedisKeyExists(key) {
     try {
-        const indexes = await client.ft._list();
-        const bidIndexKey = `${productId}:bid`;
-        const askIndexKey = `${productId}:ask`;
-
-        if (indexes.includes(bidIndexKey) && indexes.includes(askIndexKey)) {
-            console.log(`Bid index and Ask index for ${productId} already exist.`);
-            return true;
-        } else {
-            console.log(`Creating new indexes for ${productId}...`);
-
-            await client.ft.create(bidIndexKey, {
-                product_id: { type: 'TEXT' },
-                side: { type: 'TEXT' },
-                price: { type: 'NUMERIC', sortable: true },
-                quantity: { type: 'NUMERIC', sortable: true }
-            });
-
-            await client.ft.create(askIndexKey, {
-                product_id: { type: 'TEXT' },
-                side: { type: 'TEXT' },
-                price: { type: 'NUMERIC', sortable: true },
-                quantity: { type: 'NUMERIC', sortable: true }
-            });
-
-            console.log(`Indexes created for ${productId}`);
-            return true;
-        }
+        const exists = await existsAsync(key);
+        return exists;
     } catch (err) {
-        console.error('Error creating or checking indexes:', err);
+        console.error('Error checking Redis key existence:', err);
         return false;
     }
 }
 
-// Store bid/ask data in Redis
-async function storeInRedis(productId, side, price, quantity) {
-    const key = `${productId}:${side}:${price}`;
-    const formattedMessage = {
-        product_id: productId,
-        side: side,
-        price: price,
-        quantity: quantity
-    };
-
-    // Store data in Redis hash
-    await client.hSet(key, formattedMessage);
-    console.log(`Stored ${side} data for ${productId} at price ${price}`);
+// Function to store data in Redis
+async function storeInRedis(key, formattedMessage) {
+    try {
+        await hSetAsync(key, formattedMessage);
+        console.log(`Stored in Redis with key: ${key}`);
+    } catch (err) {
+        console.error('Error storing in Redis:', err);
+    }
 }
 
-// Export the necessary functions
+// Export the client and necessary functions
 module.exports = {
-    checkRedisConnection,
+    client,       // Export the client itself
     storeInRedis,
-    createIndexesIfNotExists,
+    checkRedisKeyExists,
     getSignature
 };
