@@ -19,3 +19,4 @@ clickhouse-metabase/plugins/
 ch-and-minio-S3/plugins/
 clickhouse/plugins/
 socket/node_modules
+socket-lua-python/__pycache__/
