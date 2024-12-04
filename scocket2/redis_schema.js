@@ -9,6 +9,9 @@ async function createIndexesIfNotExists(productId) {
         const bidIndexKey = `${productId}:bid`;
         const askIndexKey = `${productId}:ask`;
 
+        // Log the current indexes to debug
+        console.log('Current indexes:', indexes);
+
         // Check if the indexes for the product already exist
         if (indexes.includes(bidIndexKey) && indexes.includes(askIndexKey)) {
             console.log(`Bid index and Ask index for ${productId} already exist.`);
@@ -36,6 +39,7 @@ async function createIndexesIfNotExists(productId) {
 
             // After creating indexes, validate if they have been created
             const updatedIndexes = await client.ft._list();
+            console.log('Updated indexes:', updatedIndexes);
             if (updatedIndexes.includes(bidIndexKey) && updatedIndexes.includes(askIndexKey)) {
                 console.log('Successfully validated the creation of both bid and ask indexes.');
                 return true;

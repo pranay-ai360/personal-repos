@@ -11,7 +11,7 @@ class RedisHandler {
     // Store data in Redis
     async storeInRedis(key, formattedMessage) {
         try {
-            await this.client.hSet(key, formattedMessage);
+            await this.client.hSet(key, 'price', formattedMessage.price, 'quantity', formattedMessage.quantity);
             console.log(`Stored in Redis with key: ${key}`);
         } catch (err) {
             console.error('Error storing in Redis:', err);

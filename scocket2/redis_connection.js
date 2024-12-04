@@ -41,7 +41,8 @@ async function checkRedisKeyExists(key) {
 // Function to store data in Redis
 async function storeInRedis(key, formattedMessage) {
     try {
-        await hSetAsync(key, formattedMessage);
+        // Assuming formattedMessage is an object, store key-value pairs individually
+        await hSetAsync(key, 'price', formattedMessage.price, 'quantity', formattedMessage.quantity);
         console.log(`Stored in Redis with key: ${key}`);
     } catch (err) {
         console.error('Error storing in Redis:', err);
