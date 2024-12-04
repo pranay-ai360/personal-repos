@@ -55,7 +55,7 @@ function connectToWebSocket() {
 
 // Handle the WebSocket message
 async function handleMessage(parsedMessage) {
-    if (parsedMessage.type === 'snapshot' && parsedMessage.product_id && parsedMessage.asks) {
+    if (parsedMessage.type === 'snapshot' && parsedMessage.product_id) {
         await redisHandler.storeWebSocketMessage(parsedMessage);
     }
 
