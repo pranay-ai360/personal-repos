@@ -58,6 +58,8 @@ PRODUCT_IDS = 'BTC-USD'
 
 SMALLEST_UNIT = '0.0000001'  # Define the smallest unit globally as a string to maintain precision
 
+PHPUSD_rate = 58.001
+
 # =========================
 # Redis Configuration
 # =========================
@@ -160,17 +162,17 @@ def generate_uuid():
 
 def map_side(side):
     """
-    Maps the side from 'BID'/'ASK' to 'buys'/'sells'.
+    Maps the side from 'BID'/'ASK' to 'buy'/'sell'.
     
     Args:
-        side (str): The side of the order ('bids' or 'asks').
+        side (str): The side of the order ('bid' or 'ask').
     
     Returns:
-        str: Mapped side ('buys' or 'sells').
+        str: Mapped side ('buy' or 'sell').
     """
     mapping = {
-        'BID': 'buys',
-        'ASK': 'sells'
+        'BID': 'buy',
+        'ASK': 'sell'
     }
     return mapping.get(side.upper(), side.lower())
 
@@ -206,32 +208,36 @@ def process_snapshot(message):
         for entry in entries:
             try:
                 # Convert string entries to Decimal for precise arithmetic
-                price_per_base_asset = Decimal(entry[0])
+                price_per_base_asset_USD = Decimal(entry[0])  # Renamed
                 quantity = Decimal(entry[1])
             except (InvalidOperation, TypeError) as e:
                 print(f"Invalid entry data: {e}. Skipping entry.")
                 continue
 
             try:
-                total_price = price_per_base_asset * quantity
+                total_price_USD = price_per_base_asset_USD * quantity  # Renamed
                 smallest_unit_decimal = Decimal(SMALLEST_UNIT)
-                price_per_smallest_unit = price_per_base_asset * smallest_unit_decimal
-                no_of_units_available_as_per_smallest_unit = quantity / smallest_unit_decimal
-                how_much_value_of_crypto_in_cents = total_price * Decimal('100')
+                price_per_smallest_unit = price_per_base_asset_USD * smallest_unit_decimal
+                # Removed: no_of_units_available_as_per_smallest_unit
+                # Removed: how_much_value_of_crypto_in_cents
+
+                # Added PHP calculations
+                price_per_base_asset_PHP = price_per_base_asset_USD * Decimal(PHPUSD_rate)
+                total_price_PHP = total_price_USD * Decimal(PHPUSD_rate)
             except (InvalidOperation, DivisionByZero) as e:
                 print(f"Error in calculations: {e}. Skipping entry.")
                 continue
 
             order_data = {
                 "pair": product_id,
-                "side": map_side(side).capitalize(),  # 'Buys' or 'Sells'
+                "side": map_side(side).capitalize(),  # 'Buy' or 'Sell'
                 "smallest_unit": SMALLEST_UNIT,       # "0.0000001"
-                "price_per_base_asset": format_decimal(price_per_base_asset, 20),
+                "price_per_base_asset_USD": format_decimal(price_per_base_asset_USD, 20),
                 "quantity": format_decimal(quantity, 20),
-                "total_price": format_decimal(total_price, 20),
+                "total_price_USD": format_decimal(total_price_USD, 20),
                 "price_per_smallest_unit": format_decimal(price_per_smallest_unit, 20),
-                "no_of_units_available_as_per_smallest_unit": format_decimal(no_of_units_available_as_per_smallest_unit, 20),
-                "how_much_value_of_crypto_in_cents": format_decimal(how_much_value_of_crypto_in_cents, 20)
+                "price_per_base_asset_PHP": format_decimal(price_per_base_asset_PHP, 20),  # Added
+                "total_price_PHP": format_decimal(total_price_PHP, 20)                   # Added
             }
             data.append(order_data)
 
@@ -239,26 +245,35 @@ def process_snapshot(message):
             # Redis Storage
             # =========================
 
+            # PRANAY COMMENT 
+
+            #  mapping = {
+            #         'BID': 'buy',
+            #         'ASK': 'sell'
+            # side should either buy or sell #
+            #     }
+
             order_uuid = generate_uuid()  # Generate a unique UUID
-            sorted_set_key = f"{product_id}_{map_side(side)}"  # e.g., 'BTC-USD_buys'
+            sorted_set_key = f"{product_id}_{map_side(side)}"  # e.g., 'BTC-USD_buy'
             order_id = generate_order_id()  # e.g., 'order:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
             try:
                 # Insert order into the specific sorted set '{product-id}_{side}'
                 # Convert Decimal to float for the score
-                redis_client.zadd(sorted_set_key, {order_id: prepare_redis_score(price_per_base_asset)})
+
+                redis_client.zadd(sorted_set_key, {order_id: prepare_redis_score(price_per_base_asset_USD)})  # Updated variable
 
                 # Create a hash for the order with detailed information
                 redis_client.hset(order_id, mapping={
                     'pair': product_id,
-                    'side': map_side(side).capitalize(),  # 'Buys' or 'Sells'
+                    'side': map_side(side).capitalize(),  # 'Buy' or 'Sell'
                     'smallest_unit': SMALLEST_UNIT,
-                    'price_per_base_asset': format_decimal(price_per_base_asset, 20),
+                    'price_per_base_asset_USD': format_decimal(price_per_base_asset_USD, 20),  # Updated
                     'quantity': format_decimal(quantity, 20),
-                    'total_price': format_decimal(total_price, 20),
+                    'total_price_USD': format_decimal(total_price_USD, 20),                    # Updated
                     'price_per_smallest_unit': format_decimal(price_per_smallest_unit, 20),
-                    'no_of_units_available_as_per_smallest_unit': format_decimal(no_of_units_available_as_per_smallest_unit, 20),
-                    'how_much_value_of_crypto_in_cents': format_decimal(how_much_value_of_crypto_in_cents, 20)
+                    'price_per_base_asset_PHP': format_decimal(price_per_base_asset_PHP, 20),  # Added
+                    'total_price_PHP': format_decimal(total_price_PHP, 20)                       # Added
                 })
             except redis.exceptions.RedisError as e:
                 print(f"Redis error while storing order {order_id}: {e}")
@@ -266,10 +281,86 @@ def process_snapshot(message):
     # Print the data as JSON
     print(json.dumps(data, indent=4))
 
+def process_l2update(message):
+    """
+    Processes the 'l2update' type messages, updates Redis accordingly,
+    and prepares JSON output.
+
+    Args:
+        message (dict): The l2update message from the WebSocket.
+    """
+    product_id = message.get('product_id', 'N/A')
+    changes = message.get('changes', [])
+
+    for change in changes:
+        try:
+            side, price_str, new_quantity_str = change
+            price = Decimal(price_str)
+            new_quantity = Decimal(new_quantity_str)
+        except (InvalidOperation, ValueError) as e:
+            print(f"Invalid change data: {e}. Skipping change.")
+            continue
+
+        mapped_side = map_side(side).capitalize()  # 'Buy' or 'Sell'
+        sorted_set_key = f"{product_id}_{map_side(side)}"  # e.g., 'BTC-USD_buy'
+
+        try:
+            # Convert price to float for Redis compatibility
+            price_float = float(price)
+
+            # Fetch all order_ids with the given price
+            order_ids = redis_client.zrangebyscore(sorted_set_key, price_float, price_float)
+            
+            # Remove all matching orders
+            for order_id in order_ids:
+                redis_client.zrem(sorted_set_key, order_id)
+                redis_client.delete(order_id)
+            print(f"Removed orders at price {price} on side {mapped_side}.")
+
+            # Scan again for remaining order_ids at the same price
+            order_ids = redis_client.zrangebyscore(sorted_set_key, price_float, price_float)
+
+            # Check for zero quantity after the scan
+            if new_quantity <= Decimal('0'):
+                print(f"Skipping insertion for zero quantity at price {price} on side {mapped_side}.")
+                continue
+
+            # If no existing orders and quantity is non-zero, insert a new one
+            if not order_ids:
+                mock_snapshot = {
+                    "type": "snapshot",
+                    "product_id": product_id,
+                    "bids": [],
+                    "asks": []
+                }
+
+                if side.lower() == 'buy':
+                    mock_snapshot["bids"].append([str(price), str(new_quantity)])
+                elif side.lower() == 'sell':
+                    mock_snapshot["asks"].append([str(price), str(new_quantity)])
+
+                process_snapshot(mock_snapshot)
+                print(f"Inserted new order at price {price} on side {mapped_side} with quantity {new_quantity}.")
+            else:
+                # Update the quantity and total prices for existing orders
+                for order_id in order_ids:
+                    redis_client.hset(order_id, mapping={
+                        'quantity': format_decimal(new_quantity, 20),
+                        'total_price_USD': format_decimal(price * new_quantity, 20),
+                        'total_price_PHP': format_decimal(price * new_quantity * Decimal(PHPUSD_rate), 20)
+                    })
+                print(f"Updated orders at price {price} on side {mapped_side} with new quantity {new_quantity}.")
+
+        except redis.exceptions.RedisError as e:
+            print(f"Redis error while processing l2update: {e}")
+
+    # Optionally, print the update as JSON
+    print(json.dumps(message, indent=4))
+
 async def websocket_listener():
     """
     Connects to the Coinbase WebSocket API, subscribes to the specified channel,
-    listens for incoming messages, processes snapshots, and handles reconnections.
+    listens for incoming messages, processes snapshots and l2updates, and handles reconnections.
     """
     signature_b64, timestamp = await generate_signature()
     subscribe_message = json.dumps({
@@ -289,11 +380,22 @@ async def websocket_listener():
 
                 while True:
                     response = await websocket.recv()
-                    print(response)  # Optionally print raw responses
-                    json_response = json.loads(response)
+                    # print(response)  # Optionally print raw responses
 
-                    if json_response.get('type') == 'snapshot':
+                    try:
+                        json_response = json.loads(response)
+                    except json.JSONDecodeError as e:
+                        print(f"Failed to decode JSON: {e}. Skipping message.")
+                        continue
+
+                    msg_type = json_response.get('type')
+
+                    if msg_type == 'snapshot':
                         process_snapshot(json_response)
+                    elif msg_type == 'l2update':
+                        process_l2update(json_response)
+                    else:
+                        print(f"Unhandled message type: {msg_type}")
 
         except (websockets.exceptions.ConnectionClosedError, websockets.exceptions.ConnectionClosedOK) as e:
             print(f'Connection closed: {e}. Retrying in 1 second...')
