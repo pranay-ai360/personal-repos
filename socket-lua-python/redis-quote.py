@@ -48,7 +48,7 @@ def generate_quote_php(redis_client, sorted_set_key, target_php):
                       or None if not found.
     """
     try:
-        orders = redis_client.zrange(sorted_set_key, 0, -1)
+        orders = redis_client.zrange(sorted_set_key, 0, 20)
         print(f"Orders: {orders}")
     except redis.exceptions.ResponseError as e:
         print(f"Error fetching sorted set '{sorted_set_key}': {e}")
@@ -217,9 +217,10 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
         order_uuid = order_uuid_bytes.decode('utf-8')
         order_key = f"{order_uuid}"
 
-        # Retrieve 'quantity' and 'price_per_base_asset_PHP' from the order hash
+        # Retrieve 'quantity', 'price_per_base_asset_PHP', and 'price_per_base_asset_USD' from the order hash
         quantity_bytes = redis_client.hget(order_key, 'quantity')
         price_per_base_asset_PHP = redis_client.hget(order_key, 'price_per_base_asset_PHP')
+        price_per_base_asset_USD = redis_client.hget(order_key, 'price_per_base_asset_USD')
 
         if quantity_bytes is None or price_per_base_asset_PHP is None:
             print(f"Order '{order_uuid}' does not have 'quantity' or 'price_per_base_asset_PHP' field.")
@@ -228,6 +229,7 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
         try:
             quantity = float(quantity_bytes.decode('utf-8'))
             price_per_base_asset_PHP = float(price_per_base_asset_PHP.decode('utf-8'))
+            price_per_base_asset_USD = float(price_per_base_asset_USD.decode('utf-8')) if price_per_base_asset_USD else None
         except ValueError:
             print(f"Invalid 'quantity' or 'price_per_base_asset_PHP' for order '{order_uuid}'. Skipping.")
             continue
@@ -236,12 +238,14 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
         if user_intent == 'sell':  # Process bids for selling
             bids.append({
                 'quantity': quantity,
-                'price_per_base_asset_PHP': price_per_base_asset_PHP
+                'price_per_base_asset_PHP': price_per_base_asset_PHP,
+                'price_per_base_asset_USD': price_per_base_asset_USD
             })
         elif user_intent == 'buy':  # Process asks for buying
             asks.append({
                 'quantity': quantity,
-                'price_per_base_asset_PHP': price_per_base_asset_PHP
+                'price_per_base_asset_PHP': price_per_base_asset_PHP,
+                'price_per_base_asset_USD': price_per_base_asset_USD
             })
 
     # Sort bids (descending order by price) and asks (ascending order by price)
@@ -280,10 +284,14 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
     # Get the latest price per base asset PHP (the price of the last order processed)
     last_value_price_per_base_asset_PHP = sorted_orders[index-1]["price_per_base_asset_PHP"]
 
+    # Get the latest price per base asset USD (the price of the last order processed)
+    last_value_price_per_base_asset_USD = sorted_orders[index-1].get("price_per_base_asset_USD", None)
+
     # Format the values before returning
     return {
         "total_order_value_PHP": format_decimal(total_order_value_PHP),
-        "lastValue_price_per_base_asset_PHP": format_decimal(last_value_price_per_base_asset_PHP)
+        "lastValue_price_per_base_asset_PHP": format_decimal(last_value_price_per_base_asset_PHP),
+        "lastValue_price_per_base_asset_USD": format_decimal(last_value_price_per_base_asset_USD) if last_value_price_per_base_asset_USD else "N/A"
     }
 
 def main():
@@ -337,6 +345,7 @@ def main():
                 "sorted_set_key": sorted_set_key,
                 "target_coins": target_coins,
                 "lastValue_price_per_base_asset_PHP": quote_result["lastValue_price_per_base_asset_PHP"],
+                "lastValue_price_per_base_asset_USD": quote_result["lastValue_price_per_base_asset_USD"],
                 "total_order_value_PHP": quote_result["total_order_value_PHP"]
             }
         else:
