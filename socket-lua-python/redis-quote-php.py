@@ -4,7 +4,7 @@ import redis
 import sys
 import json
 
-target_php = 22852  # Target amount in PHP (e.g., 2800 PHP)
+target_php = 2285200  # Target amount in PHP (e.g., 2800 PHP)
 user_intent = 'sell'  # 'buy' or 'sell'
 request_type = 'php'  # 'php' or 'coin'
 
@@ -131,6 +131,14 @@ def generate_quote_php(redis_client, sorted_set_key, target_php):
 
         index += 1
 
+    # Check if the order can be filled
+    if total_order_value_PHP < target_php:
+        return {
+            "message": "Order cannot be filled",
+            "total_order_value_PHP": format_decimal(total_order_value_PHP),
+            "total_order_value_USD": format_decimal(total_order_value_USD)
+        }
+
     # Format the values before returning
     return {
         "total_order_value_PHP": format_decimal(total_order_value_PHP),
@@ -170,13 +178,14 @@ def main():
     if request_type == 'php':
         quote_result = generate_quote_php(redis_client, sorted_set_key, target_php)
         if quote_result:
+            # Safely access keys with a check for their existence
             result = {
                 "sorted_set_key": sorted_set_key,
                 "target_php": target_php,
-                "lastValue_price_per_base_asset_USD": quote_result["lastValue_price_per_base_asset_USD"],
-                "total_order_value_PHP": quote_result["total_order_value_PHP"],
-                "total_order_value_USD": quote_result["total_order_value_USD"],
-                "total_quantity_coins": quote_result["total_quantity_coins"]
+                "lastValue_price_per_base_asset_USD": quote_result.get("lastValue_price_per_base_asset_USD", "N/A"),
+                "total_order_value_PHP": quote_result.get("total_order_value_PHP", "N/A"),
+                "total_order_value_USD": quote_result.get("total_order_value_USD", "N/A"),
+                "total_quantity_coins": quote_result.get("total_quantity_coins", "N/A")
             }
         else:
             result = {

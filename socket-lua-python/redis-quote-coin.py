@@ -4,7 +4,7 @@ import redis
 import sys
 import json
 
-target_coins = 6.5  # Target amount of coins (for example, 2.5 BTC)
+target_coins = 4  # Target amount of coins (for example, 2.5 BTC)
 user_intent = 'sell'  # 'buy' or 'sell'
 request_type = 'coin'  # 'php' or 'coin'
 
@@ -114,24 +114,20 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
 
         print(f"Processing order {index+1}: Quantity = {quantity}, Price (USD) = {price_per_base_asset_USD}")
 
-        # Check if the quantity exceeds the remaining target
-        if quantity > target_coins - previous_target:
-            print("Order cannot be filled")
-            break
-
-        # Check if we can accumulate the full quantity from the current order
-        if previous_target + quantity <= target_coins:
-            total_price_PHP += quantity * price_per_base_asset_PHP
-            total_price_USD += quantity * price_per_base_asset_USD
-            previous_target += quantity
-            last_price_per_base_asset_USD = price_per_base_asset_USD  # Update last price
-        else:
-            # If we exceed the target with the current order, calculate the remaining price
+        # If we have enough coins in the current order to meet or exceed the target, calculate the price
+        if previous_target + quantity >= target_coins:
             remaining_target = target_coins - previous_target
             total_price_PHP += remaining_target * price_per_base_asset_PHP
             total_price_USD += remaining_target * price_per_base_asset_USD
             last_price_per_base_asset_USD = price_per_base_asset_USD  # Update last price
+            previous_target += remaining_target  # Target is now met
             break
+        else:
+            # Otherwise, accumulate the full order
+            total_price_PHP += quantity * price_per_base_asset_PHP
+            total_price_USD += quantity * price_per_base_asset_USD
+            previous_target += quantity
+            last_price_per_base_asset_USD = price_per_base_asset_USD  # Update last price
 
         index += 1
 
