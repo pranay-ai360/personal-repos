@@ -2,3 +2,11 @@ asyncio
 websockets
 tabulate
 redis
+
+## for quote 
+
+fastapi
+uvicorn
+redis
+pydantic
+python-dotenv

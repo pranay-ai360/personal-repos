@@ -3,6 +3,7 @@
 import redis
 import sys
 import argparse
+import json
 
 def generate_quote(redis_client, sorted_set_key, target_cents):
     """
@@ -11,7 +12,7 @@ def generate_quote(redis_client, sorted_set_key, target_cents):
 
     Args:
         redis_client (redis.Redis): Redis client instance.
-        sorted_set_key (str): Name of the sorted set (e.g., 'BTC-USD_asks').
+        sorted_set_key (str): Name of the sorted set (e.g., 'BTC-USD_buys' or 'BTC-USD_sells').
         target_cents (float): Target cumulative value in cents.
 
     Returns:
@@ -74,7 +75,7 @@ def main():
     parser.add_argument(
         'sorted_set_key',
         type=str,
-        help="Name of the Redis sorted set (e.g., 'BTC-USD_asks')."
+        help="Name of the Redis sorted set (e.g., 'BTC-USD_buys' or 'BTC-USD_sells')."
     )
     parser.add_argument(
         'target_cents',
@@ -89,7 +90,13 @@ def main():
 
     # Validate target_cents
     if target_cents <= 0:
-        print("Error: target_cents must be a positive number.")
+        result = {
+            "sorted_set_key": sorted_set_key,
+            "target_cents": target_cents,
+            "total_price": None,
+            "message": "Error: target_cents must be a positive number."
+        }
+        print(json.dumps(result, indent=4))
         sys.exit(1)
 
     # Configure Redis connection parameters
@@ -109,16 +116,33 @@ def main():
         # Test the connection
         redis_client.ping()
     except redis.exceptions.ConnectionError as e:
-        print(f"Failed to connect to Redis: {e}")
+        result = {
+            "sorted_set_key": sorted_set_key,
+            "target_cents": target_cents,
+            "total_price": None,
+            "message": f"Failed to connect to Redis: {e}"
+        }
+        print(json.dumps(result, indent=4))
         sys.exit(1)
 
     # Generate the quote
     total_price = generate_quote(redis_client, sorted_set_key, target_cents)
 
     if total_price is not None:
-        print(f"Total Price where cumulative value >= {target_cents}: {total_price}")
+        result = {
+            "sorted_set_key": sorted_set_key,
+            "target_cents": target_cents,
+            "total_price": total_price
+        }
+        print(json.dumps(result, indent=4))
     else:
-        print(f"No orders found where cumulative value >= {target_cents}.")
+        result = {
+            "sorted_set_key": sorted_set_key,
+            "target_cents": target_cents,
+            "total_price": None,
+            "message": f"No orders found where cumulative value >= {target_cents}."
+        }
+        print(json.dumps(result, indent=4))
 
 if __name__ == '__main__':
     main()
