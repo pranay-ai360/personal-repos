@@ -10,3 +10,7 @@ uvicorn
 redis
 pydantic
 python-dotenv
+
+## For order 
+
+requests
