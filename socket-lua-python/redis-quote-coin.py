@@ -4,8 +4,8 @@ import redis
 import sys
 import json
 
-target_coins = 4  # Target amount of coins (for example, 2.5 BTC)
-user_intent = 'sell'  # 'buy' or 'sell'
+target_coins = 3  # Target amount of coins (for example, 2.5 BTC)
+user_intent = 'buy'  # 'buy' or 'sell'
 request_type = 'coin'  # 'php' or 'coin'
 
 # Function to format the decimal values
@@ -39,7 +39,7 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
     This version correctly calculates the price in USD based on the quantity.
     """
     try:
-        orders = redis_client.zrange(sorted_set_key, 0, -1)
+        orders = redis_client.zrange(sorted_set_key, 0, 20)
         print(f"Orders: {orders}")
     except redis.exceptions.ResponseError as e:
         print(f"Error fetching sorted set '{sorted_set_key}': {e}")
@@ -114,6 +114,11 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
 
         print(f"Processing order {index+1}: Quantity = {quantity}, Price (USD) = {price_per_base_asset_USD}")
 
+        # Check if the quantity exceeds the remaining target
+        if quantity > target_coins - previous_target:
+            print("Order cannot be filled")
+            break
+
         # Check if we can accumulate the full quantity from the current order
         if previous_target + quantity <= target_coins:
             total_price_PHP += quantity * price_per_base_asset_PHP
@@ -129,6 +134,12 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
             break
 
         index += 1
+
+    # Check if target coins were met, if not, return the appropriate message
+    if previous_target < target_coins:
+        return {
+            "message": "Order cannot be filled. Insufficient quantity."
+        }
 
     # Format the values before returning
     return {
