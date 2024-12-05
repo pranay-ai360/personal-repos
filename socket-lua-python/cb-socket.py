@@ -16,6 +16,7 @@ SECRET_KEY = 'P8npGsgqjYbgeI7chrkVNHxASkL44hEIUyizOzVBvn7lzjeGhrGnZl3X+wgPb81S01
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #!/usr/bin/env python3
+#!/usr/bin/env python3
 
 import asyncio
 import base64
@@ -38,6 +39,12 @@ from decimal import Decimal, getcontext, InvalidOperation, DivisionByZero
 # API_KEY = os.getenv('API_KEY')
 # PASSPHRASE = os.getenv('PASSPHRASE')
 # SECRET_KEY = os.getenv('SECRET_KEY')
+
+# **IMPORTANT:** Remove hardcoded credentials and use environment variables instead.
+# Example:
+# API_KEY = os.getenv('COINBASE_API_KEY')
+# PASSPHRASE = os.getenv('COINBASE_PASSPHRASE')
+# SECRET_KEY = os.getenv('COINBASE_SECRET_KEY')
 
 # API_KEY = 'your_api_key_here'          # Replace with your actual API key
 # PASSPHRASE = 'your_passphrase_here'    # Replace with your actual passphrase
@@ -90,6 +97,21 @@ getcontext().prec = 28  # You can adjust this as needed
 def pad_base64(s):
     """Pad Base64 string with '=' to make its length a multiple of 4."""
     return s + '=' * (-len(s) % 4)
+
+def format_decimal(value, decimal_places=20):
+    """
+    Formats a Decimal value to a string with up to 'decimal_places' decimal places,
+    removing any trailing zeros.
+
+    Args:
+        value (Decimal): The Decimal value to format.
+        decimal_places (int): Maximum number of decimal places.
+
+    Returns:
+        str: Formatted decimal as string.
+    """
+    format_str = f'{{0:.{decimal_places}f}}'
+    return format_str.format(value).rstrip('0').rstrip('.') if '.' in format_str.format(value) else format_str.format(value)
 
 async def generate_signature():
     """
@@ -204,12 +226,12 @@ def process_snapshot(message):
                 "pair": product_id,
                 "side": map_side(side).capitalize(),  # 'Buys' or 'Sells'
                 "smallest_unit": SMALLEST_UNIT,       # "0.0000001"
-                "price_per_base_asset": f"{price_per_base_asset:.12f}",
-                "quantity": f"{quantity:.12f}",
-                "total_price": f"{total_price:.12f}",
-                "price_per_smallest_unit": f"{price_per_smallest_unit:.12f}",
-                "no_of_units_available_as_per_smallest_unit": f"{no_of_units_available_as_per_smallest_unit:.12f}",
-                "how_much_value_of_crypto_in_cents": f"{how_much_value_of_crypto_in_cents:.12f}"
+                "price_per_base_asset": format_decimal(price_per_base_asset, 20),
+                "quantity": format_decimal(quantity, 20),
+                "total_price": format_decimal(total_price, 20),
+                "price_per_smallest_unit": format_decimal(price_per_smallest_unit, 20),
+                "no_of_units_available_as_per_smallest_unit": format_decimal(no_of_units_available_as_per_smallest_unit, 20),
+                "how_much_value_of_crypto_in_cents": format_decimal(how_much_value_of_crypto_in_cents, 20)
             }
             data.append(order_data)
 
@@ -224,19 +246,19 @@ def process_snapshot(message):
             try:
                 # Insert order into the specific sorted set '{product-id}_{side}'
                 # Convert Decimal to float for the score
-                redis_client.zadd(sorted_set_key, {order_uuid: prepare_redis_score(price_per_base_asset)})
+                redis_client.zadd(sorted_set_key, {order_id: prepare_redis_score(price_per_base_asset)})
 
                 # Create a hash for the order with detailed information
                 redis_client.hset(order_id, mapping={
                     'pair': product_id,
                     'side': map_side(side).capitalize(),  # 'Buys' or 'Sells'
                     'smallest_unit': SMALLEST_UNIT,
-                    'price_per_base_asset': f"{price_per_base_asset:.12f}",
-                    'quantity': f"{quantity:.12f}",
-                    'total_price': f"{total_price:.12f}",
-                    'price_per_smallest_unit': f"{price_per_smallest_unit:.12f}",
-                    'no_of_units_available_as_per_smallest_unit': f"{no_of_units_available_as_per_smallest_unit:.12f}",
-                    'how_much_value_of_crypto_in_cents': f"{how_much_value_of_crypto_in_cents:.12f}"
+                    'price_per_base_asset': format_decimal(price_per_base_asset, 20),
+                    'quantity': format_decimal(quantity, 20),
+                    'total_price': format_decimal(total_price, 20),
+                    'price_per_smallest_unit': format_decimal(price_per_smallest_unit, 20),
+                    'no_of_units_available_as_per_smallest_unit': format_decimal(no_of_units_available_as_per_smallest_unit, 20),
+                    'how_much_value_of_crypto_in_cents': format_decimal(how_much_value_of_crypto_in_cents, 20)
                 })
             except redis.exceptions.RedisError as e:
                 print(f"Redis error while storing order {order_id}: {e}")

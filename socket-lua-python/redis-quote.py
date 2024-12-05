@@ -2,8 +2,11 @@
 
 import redis
 import sys
-import argparse
 import json
+
+# Predefined variables
+sorted_set_key = 'BTC-USD_asks'
+target_cents = 700
 
 def generate_quote(redis_client, sorted_set_key, target_cents):
     """
@@ -21,6 +24,7 @@ def generate_quote(redis_client, sorted_set_key, target_cents):
     try:
         # Fetch all members of the sorted set in ascending order of score
         orders = redis_client.zrange(sorted_set_key, 0, -1)
+        print(orders)
     except redis.exceptions.ResponseError as e:
         print(f"Error fetching sorted set '{sorted_set_key}': {e}")
         return None
@@ -33,7 +37,7 @@ def generate_quote(redis_client, sorted_set_key, target_cents):
 
     for order_uuid_bytes in orders:
         order_uuid = order_uuid_bytes.decode('utf-8')
-        order_key = f"order:{order_uuid}"
+        order_key = f"{order_uuid}"
 
         # Retrieve 'how_much_value_of_crypto_in_cents' from the order hash
         how_much_bytes = redis_client.hget(order_key, 'how_much_value_of_crypto_in_cents')
@@ -68,25 +72,8 @@ def generate_quote(redis_client, sorted_set_key, target_cents):
     return None
 
 def main():
-    # Set up command-line argument parsing
-    parser = argparse.ArgumentParser(
-        description="Generate a quote from Redis sorted sets based on target cents."
-    )
-    parser.add_argument(
-        'sorted_set_key',
-        type=str,
-        help="Name of the Redis sorted set (e.g., 'BTC-USD_buys' or 'BTC-USD_sells')."
-    )
-    parser.add_argument(
-        'target_cents',
-        type=float,
-        help="Target cumulative value in cents (e.g., 7500000)."
-    )
-
-    args = parser.parse_args()
-
-    sorted_set_key = args.sorted_set_key
-    target_cents = args.target_cents
+    # Use the predefined variables
+    global sorted_set_key, target_cents
 
     # Validate target_cents
     if target_cents <= 0:
@@ -103,7 +90,7 @@ def main():
     REDIS_HOST = '127.0.0.1'          # Ensure this matches your Redis server configuration
     REDIS_PORT = 6379
     REDIS_DB = 0                      # Default Redis database
-    REDIS_CONNECT_TIMEOUT = 1000000   # Adjust timeout value if necessary
+    REDIS_CONNECT_TIMEOUT = 5         # Adjust timeout value if necessary (in seconds)
 
     try:
         # Initialize Redis client
