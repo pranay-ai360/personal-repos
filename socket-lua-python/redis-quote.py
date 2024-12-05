@@ -191,7 +191,7 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
         target_coins (float): Target cumulative quantity in coins.
 
     Returns:
-        dict or None: A dictionary containing the total price in PHP and total order value (PHP),
+        dict or None: A dictionary containing the total price in USD and total order value,
                       or None if not found.
     """
     try:
@@ -207,7 +207,8 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
 
     # Initialize accumulators
     cumulative_quantity = 0.0
-    total_order_value_PHP = 0.0
+    total_order_value = 0.0
+    price_USD = 0.0
 
     # Separate orders into bids and asks
     bids = []
@@ -217,73 +218,73 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
         order_uuid = order_uuid_bytes.decode('utf-8')
         order_key = f"{order_uuid}"
 
-        # Retrieve 'quantity' and 'price_per_base_asset_PHP' from the order hash
+        # Retrieve 'quantity' and 'price_per_base_asset_USD' from the order hash
         quantity_bytes = redis_client.hget(order_key, 'quantity')
-        price_per_base_asset_PHP = redis_client.hget(order_key, 'price_per_base_asset_PHP')
+        price_bytes = redis_client.hget(order_key, 'price_per_base_asset_USD')
 
-        if quantity_bytes is None or price_per_base_asset_PHP is None:
-            print(f"Order '{order_uuid}' does not have 'quantity' or 'price_per_base_asset_PHP' field.")
+        if quantity_bytes is None or price_bytes is None:
+            print(f"Order '{order_uuid}' does not have 'quantity' or 'price_per_base_asset_USD' field.")
             continue
 
         try:
             quantity = float(quantity_bytes.decode('utf-8'))
-            price_per_base_asset_PHP = float(price_per_base_asset_PHP.decode('utf-8'))
+            price_per_base_asset_USD = float(price_bytes.decode('utf-8'))
         except ValueError:
-            print(f"Invalid 'quantity' or 'price_per_base_asset_PHP' for order '{order_uuid}'. Skipping.")
+            print(f"Invalid 'quantity' or 'price_per_base_asset_USD' for order '{order_uuid}'. Skipping.")
             continue
 
         # Append to either bids or asks based on the order type
         if user_intent == 'sell':  # Process bids for selling
             bids.append({
                 'quantity': quantity,
-                'price_per_base_asset_PHP': price_per_base_asset_PHP
+                'price_per_base_asset_USD': price_per_base_asset_USD
             })
         elif user_intent == 'buy':  # Process asks for buying
             asks.append({
                 'quantity': quantity,
-                'price_per_base_asset_PHP': price_per_base_asset_PHP
+                'price_per_base_asset_USD': price_per_base_asset_USD
             })
 
     # Sort bids (descending order by price) and asks (ascending order by price)
     if user_intent == 'sell':
-        sorted_orders = sorted(bids, key=lambda x: x['price_per_base_asset_PHP'], reverse=True)
+        sorted_orders = sorted(bids, key=lambda x: x['price_per_base_asset_USD'], reverse=True)
     else:
-        sorted_orders = sorted(asks, key=lambda x: x['price_per_base_asset_PHP'])
+        sorted_orders = sorted(asks, key=lambda x: x['price_per_base_asset_USD'])
 
     # Calculate total price for the target quantity
-    total_price_PHP = 0
+    total_price = 0
     previous_target = 0
     index = 0
 
     while previous_target < target_coins and index < len(sorted_orders):
         order = sorted_orders[index]
         quantity = order["quantity"]
-        price_per_base_asset_PHP = order["price_per_base_asset_PHP"]
+        price_per_base_asset_USD = order["price_per_base_asset_USD"]
 
-        print(f"Processing order {index+1}: Quantity = {quantity}, Price (PHP) = {price_per_base_asset_PHP}")
+        print(f"Processing order {index+1}: Quantity = {quantity}, Price = {price_per_base_asset_USD}")
 
         # Check if we can accumulate the full quantity from the current order
         if previous_target + quantity <= target_coins:
-            total_price_PHP += quantity * price_per_base_asset_PHP
+            total_price += quantity * price_per_base_asset_USD
             previous_target += quantity
         else:
             # If we exceed the target with the current order, calculate the remaining price
             remaining_target = target_coins - previous_target
-            total_price_PHP += remaining_target * price_per_base_asset_PHP
+            total_price += remaining_target * price_per_base_asset_USD
             break
 
         index += 1
 
     # Adjust to provide correct total order value
-    total_order_value_PHP = total_price_PHP
+    total_order_value = total_price
 
-    # Get the latest price per base asset PHP (the price of the last order processed)
-    last_value_price_per_base_asset_PHP = sorted_orders[index-1]["price_per_base_asset_PHP"]
+    # Get the latest price per base asset USD (the price of the last order processed)
+    last_value_price_per_base_asset_USD = sorted_orders[index-1]["price_per_base_asset_USD"]
 
     # Format the values before returning
     return {
-        "total_order_value_PHP": format_decimal(total_order_value_PHP),
-        "lastValue_price_per_base_asset_PHP": format_decimal(last_value_price_per_base_asset_PHP)
+        "total_order_value": format_decimal(total_order_value),
+        "lastValue_price_per_base_asset_USD": format_decimal(last_value_price_per_base_asset_USD)
     }
 
 def main():
@@ -307,7 +308,7 @@ def main():
         result = {
             "sorted_set_key": sorted_set_key,
             "target_php": target_php,
-            "total_order_value_PHP": None,
+            "total_order_value": None,
             "message": f"Failed to connect to Redis: {e}"
         }
         print(json.dumps(result, indent=4))
@@ -336,21 +337,21 @@ def main():
             result = {
                 "sorted_set_key": sorted_set_key,
                 "target_coins": target_coins,
-                "lastValue_price_per_base_asset_PHP": quote_result["lastValue_price_per_base_asset_PHP"],
-                "total_order_value_PHP": quote_result["total_order_value_PHP"]
+                "lastValue_price_per_base_asset_USD": quote_result["lastValue_price_per_base_asset_USD"],
+                "total_order_value": quote_result["total_order_value"]
             }
         else:
             result = {
                 "sorted_set_key": sorted_set_key,
                 "target_coins": target_coins,
-                "total_order_value_PHP": None,
+                "total_order_value": None,
                 "message": "No orders found where cumulative value meets the target."
             }
     else:
         result = {
             "sorted_set_key": sorted_set_key,
             "target_php": target_php,
-            "total_order_value_PHP": None,
+            "total_order_value": None,
             "message": "Error: Invalid request type. Must be 'php' or 'coin'."
         }
 
