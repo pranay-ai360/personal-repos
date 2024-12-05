@@ -4,8 +4,8 @@ import redis
 import sys
 import json
 
-target_coins = 3  # Target amount of coins (for example, 2.5 BTC)
-user_intent = 'buy'  # 'buy' or 'sell'
+target_coins = 6.5  # Target amount of coins (for example, 2.5 BTC)
+user_intent = 'sell'  # 'buy' or 'sell'
 request_type = 'coin'  # 'php' or 'coin'
 
 # Function to format the decimal values
@@ -142,11 +142,18 @@ def generate_quote_coin(redis_client, sorted_set_key, target_coins):
         }
 
     # Format the values before returning
-    return {
+    result = {
         "total_order_value_PHP": format_decimal(total_price_PHP),
         "total_order_value_USD": format_decimal(total_price_USD),
-        "lastValue_price_per_base_asset_USD": format_decimal(last_price_per_base_asset_USD) if last_price_per_base_asset_USD else "N/A"
     }
+
+    # Only add the last price if it's available
+    if last_price_per_base_asset_USD is not None:
+        result["lastValue_price_per_base_asset_USD"] = format_decimal(last_price_per_base_asset_USD)
+    else:
+        result["lastValue_price_per_base_asset_USD"] = "N/A"
+    
+    return result
 
 
 def main():
@@ -183,9 +190,9 @@ def main():
             result = {
                 "sorted_set_key": sorted_set_key,
                 "target_coins": target_coins,
-                "lastValue_price_per_base_asset_USD": quote_result["lastValue_price_per_base_asset_USD"],
-                "total_order_value_PHP": quote_result["total_order_value_PHP"],
-                "total_order_value_USD": quote_result["total_order_value_USD"]
+                "total_order_value_PHP": quote_result.get("total_order_value_PHP"),
+                "total_order_value_USD": quote_result.get("total_order_value_USD"),
+                "lastValue_price_per_base_asset_USD": quote_result.get("lastValue_price_per_base_asset_USD")
             }
         else:
             result = {
