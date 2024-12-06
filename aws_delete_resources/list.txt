@@ -1,0 +1,7 @@
+No NAT Gateways found in ap-south-1.
+NAT Gateway IDs in ap-southeast-2:
+nat-09253f3e9a35ceda6
+No NAT Gateways found in ap-northeast-1.
+No NAT Gateways found in us-east-1.
+NAT Gateway IDs in us-west-2:
+nat-0acd13021c240a0a7

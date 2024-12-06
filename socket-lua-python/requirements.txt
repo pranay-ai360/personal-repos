@@ -14,3 +14,6 @@ python-dotenv
 ## For order 
 
 requests
+
+##FOR ticker
+confluent-kafka

@@ -1,7 +1,3 @@
-# API_KEY = '24ab46f784d1b20db435b852086e3250'
-# PASSPHRASE = 'akmwnltyfgb'
-# SECRET_KEY = 'P8npGsgqjYbgeI7chrkVNHxASkL44hEIUyizOzVBvn7lzjeGhrGnZl3X+wgPb81S01Gg6+VTNlsa8+mIrz4YKw=='
-
 import asyncio
 import base64
 import hashlib
@@ -11,13 +7,12 @@ import os
 import time
 import websockets
 import redis
+from confluent_kafka import Producer
 
 # Provided API credentials (hardcoded)
-
-
-# API_KEY = os.getenv('COINBASE_API_KEY')
-# PASSPHRASE = os.getenv('COINBASE_PASSPHRASE')
-# SECRET_KEY = os.getenv('COINBASE_SECRET_KEY')
+API_KEY = '24ab46f784d1b20db435b852086e3250'
+PASSPHRASE = 'akmwnltyfgb'
+SECRET_KEY = 'P8npGsgqjYbgeI7chrkVNHxASkL44hEIUyizOzVBvn7lzjeGhrGnZl3X+wgPb81S01Gg6+VTNlsa8+mIrz4YKw=='
 
 # WebSocket feed URI and path for signature
 URI = 'wss://ws-direct.sandbox.exchange.coinbase.com'
@@ -33,6 +28,9 @@ product_ids = ['BTC-USD', 'ETH-USD']  # Add more pairs as needed
 # Redis connection setup
 redis_client = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
 
+# Kafka setup (localhost:9092)
+kafka_producer = Producer({'bootstrap.servers': 'localhost:9092'})
+
 # Function to generate the signature for WebSocket connection
 async def generate_signature():
     timestamp = str(time.time())
@@ -44,6 +42,13 @@ async def generate_signature():
         digestmod=hashlib.sha256).digest()
     signature_b64 = base64.b64encode(signature).decode().rstrip('\n')
     return signature_b64, timestamp
+
+# Kafka producer callback to confirm message delivery
+def delivery_callback(err, msg):
+    if err is not None:
+        print(f"Error delivering message: {err}")
+    else:
+        print(f"Message delivered to {msg.topic()} [{msg.partition()}] at offset {msg.offset()}")
 
 # WebSocket listener function to subscribe and listen to market data
 async def websocket_listener():
@@ -87,6 +92,10 @@ async def websocket_listener():
                             # Publish the updated price to Redis Pub/Sub
                             redis_client.publish(f"{maya_product_id}", price_php)
                             print(f"{maya_product_id}: {price_php}")
+                            
+                            # Publish the updated price to Kafka topic (product_id is used as the topic)
+                            kafka_producer.produce(maya_product_id, key=maya_product_id, value=str(price_php), callback=delivery_callback)
+                            kafka_producer.flush()  # Ensure the message is sent
 
         except (websockets.exceptions.ConnectionClosedError, websockets.exceptions.ConnectionClosedOK):
             print('Connection closed, retrying..')
