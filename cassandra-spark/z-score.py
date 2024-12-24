@@ -16,7 +16,8 @@ session = cluster.connect(cassandra_keyspace)
 query = """
     SELECT sell_asset_amount 
     FROM {table}
-    WHERE buy_asset_symbol = 'BTC' AND status = 'success'
+    WHERE buy_asset_symbol = 'BTC' AND status = 'success' 
+    ALLOW FILTERING
 """.format(table=cassandra_table)
 
 # Prepare and execute the query
