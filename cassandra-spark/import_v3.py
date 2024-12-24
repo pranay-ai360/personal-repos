@@ -37,7 +37,7 @@ mysql_query = f"""
 SELECT trade_id, buy_asset_amount, buy_asset_symbol, created_at, instrument_id, 
        price, sell_asset_amount, sell_asset_symbol, status, updated_at, user_id
 FROM {mysql_table}
-LIMIT 10;
+LIMIT 10000;
 """
 
 # Prepare the Cassandra insert query with only the selected columns
@@ -64,6 +64,9 @@ while True:
     
     # Process the fetched rows
     for row in rows:
+        # Convert user_id to UUID if it's in string format
+        user_id = uuid.UUID(row[10]) if row[10] else None
+        
         data = (
             uuid.UUID(row[0]),                         # trade_id
             row[1] if row[1] is not None else None,     # buy_asset_amount
@@ -75,7 +78,7 @@ while True:
             row[7],                                    # sell_asset_symbol
             row[8],                                    # status
             row[9],                                    # updated_at
-            uuid.UUID(row[10])                         # user_id
+            user_id                                    # user_id (converted to UUID)
         )
         
         # Print the data as it's getting processed
