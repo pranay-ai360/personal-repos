@@ -38,7 +38,7 @@ payload = {
    'product_id': 'BTC-USD',
    'client_oid': idempotency_key,
    'size': '0.001',
-   'time_in_force': 'GTC',
+   'time_in_force': 'FOK',
    'price': '2000'
 }
 

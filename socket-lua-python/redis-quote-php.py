@@ -4,8 +4,8 @@ import redis
 import sys
 import json
 
-target_php = 2285200  # Target amount in PHP (e.g., 2800 PHP)
-user_intent = 'sell'  # 'buy' or 'sell'
+target_php = 9850  # Target amount in PHP (e.g., 2800 PHP)
+user_intent = 'buy'  # 'buy' or 'sell'
 request_type = 'php'  # 'php' or 'coin'
 
 # Function to format the decimal values

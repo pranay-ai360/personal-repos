@@ -1,0 +1,88 @@
+version: '3'
+
+services:
+  cassandra:
+#    build: ./cassandra  # Path to the directory with Dockerfile and entrypoint.sh
+    image: cassandra:latest
+    container_name: cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=MyCluster
+      - CASSANDRA_LISTEN_ADDRESS=cassandra
+      - CASSANDRA_RPC_ADDRESS=0.0.0.0
+      - CASSANDRA_BROADCAST_ADDRESS=cassandra
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    ports:
+      - "9042:9042"  # Cassandra CQL port for Spark to connect
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    networks:
+      - spark-net
+
+  spark:
+    build: ./spark  # Path to the directory with Dockerfile and entrypoint.sh
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_DRIVER_MEMORY=2g
+      - SPARK_EXECUTOR_MEMORY=2g
+      - SPARK_CASSANDRA_HOST=cassandra  # Set the Cassandra hostname to the Cassandra service name
+      - SPARK_CASSANDRA_PORT=9042       # Use the default Cassandra CQL port
+    ports:
+      - "8080:8080"   # Spark Web UI
+      - "7077:7077"   # Spark Master port
+    depends_on:
+      - cassandra
+    networks:
+      - spark-net
+
+  spark-worker:
+    image: spark:latest
+    container_name: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    depends_on:
+      - spark
+    networks:
+      - spark-net
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    hostname: metabase
+    volumes:
+      - /dev/urandom:/dev/random:ro
+    ports:
+      - 3000:3000
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabaseappdb
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabase
+      MB_DB_PASS: mysecretpassword
+      MB_DB_HOST: postgres
+    networks:
+      - spark-net
+    healthcheck:
+      test: curl --fail -I http://localhost:3000/api/health || exit 1
+      interval: 15s
+      timeout: 5s
+      retries: 5
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: metabase
+      POSTGRES_DB: metabaseappdb
+      POSTGRES_PASSWORD: mysecretpassword
+    networks:
+      - spark-net
+
+volumes:
+  cassandra_data:
+
+networks:
+  spark-net:
+    driver: bridge

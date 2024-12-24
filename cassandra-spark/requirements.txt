@@ -1,0 +1,3 @@
+pymysql
+cassandra-driver
+mysql-connector-python

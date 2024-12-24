@@ -17,3 +17,11 @@ requests
 
 ##FOR ticker
 confluent-kafka
+
+
+## FOr Influx DB 
+
+kafka
+influxdb
+kafka-python
+influxdb_client
