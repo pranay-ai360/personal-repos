@@ -40,4 +40,5 @@ process_files() {
 export -f process_files
 
 # Find all files in S3FOLDER and its subfolders, starting with 'UTR_' and process them
-find ./S3FOLDER -type f -name 'UTR_*.csv' -exec bash -c 'process_files "$0"' {} \;
+find ./downloaded_files_2025 -type f -name 'UTR_BuySell_*.csv' -exec bash -c 'process_files "$0"' {} \;
+find ./downloaded_files_2025 -type f -name 'UTR_999999999999*.csv' -exec bash -c 'process_files "$0"' {} \;

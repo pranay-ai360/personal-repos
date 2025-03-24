@@ -1,0 +1,23 @@
+# docker-compose.yml
+
+version: "3.8"
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      environment: 'development'
+      elliptic_api_key: '4c4f37b303910b88c0b1ceb9f936d207'
+      elliptic_api_secret: 'f8b9ae80f123229127dc18f0d546dc4f'
+      SQS_queue_url_transaction: 'https://sqs.us-west-2.amazonaws.com/370296042006/maya-elliptic'
+      SQS_queue_url_wallet: 'https://sqs.us-west-2.amazonaws.com/370296042006/maya-elliptic-wallet'
+      AWS_REGION: 'us-west-2'
+      AWS_ACCESS_KEY: "xx"
+      AWS_SECRET_KEY: "xx"
+      postgres_url: 'postgresql://doadmin:xxx@postgres-cluster-do-user-12892822-0.c.db.ondigitalocean.com:25060/elliptic'
+      postgres_max_connections: 2

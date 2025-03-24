@@ -1,0 +1,1448 @@
+openapi: 3.0.0
+info:
+  title: Company & Crypto Payment API
+  version: "1.0.0"
+  description: >
+    This API manages company details, API keys, authentication, rates, quotes,
+    counterparty enquiries/creation, and payment operations.
+servers:
+  - url: https://api.example.com
+tags:
+  - name: Authentication
+    description: Endpoints for authentication.
+  - name: Balance
+    description: Endpoints for retrieving balance information & Address.
+  - name: Counterparty
+    description: Endpoints for counterparty enquiry and creation.
+  - name: Rates & Quotes
+    description: Endpoints for retrieving rates and generating quotes.
+  - name: Execute Quotes
+    description: Endpoints for retrieving rates and generating quotes.
+  - name: Payments
+    description: Endpoints for sending payments and checking status.
+  - name: ADMIN APIS
+    description: Endpoints for creating companies and managing API keys.
+  - name: Do not Need 
+    description: This is still not work in progress
+paths:
+  /companies:
+    post:
+      tags:
+        - ADMIN APIS
+      summary: Create Company
+      description: Create a new company with its details.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CPMID:
+                  type: string
+                  format: uuid
+                  example: "0b99d577-2e23-48b9-96e8-7ff20b945f02"
+                MayaConnectID:
+                  type: string
+                  format: uuid
+                  example: "0b99d577-2e23-48b9-96e8-7ff20b945f02"
+                companyName:
+                  type: string
+                  example: "Maya INC"
+                BuyRate:
+                  type: integer
+                  description: "Discount rate in basis points"
+                  example: 100
+                SellRate:
+                  type: integer
+                  description: "Discount rate in basis points"
+                  example: 100
+                SendRate:
+                  type: integer
+                  description: "Discount rate in basis points"
+                  example: 100
+              required:
+                - CPMID
+                - companyName
+                - BuydiscountRate
+                - SelldiscountRate
+                - SendDiscountRate
+      responses:
+        '201':
+          description: Company created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Company created successfully."
+                    
+  /companies/generate/crypto-addresses:
+    post:
+      tags:
+        - ADMIN APIS
+      summary: Generate Crypto Addresses for Company
+      description: >
+        Generate crypto addresses for a company after it has been created. The user can send an array of crypto detail objects. 
+        Each object must include the crypto symbol and blockchain. The response will include the generated address for each.
+      parameters:
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          description: The ID of the company for which crypto addresses will be generated.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  cryptosymbol:
+                    type: string
+                    example: "USDC"
+                  cryptoBlockchain:
+                    type: string
+                    example: "Solana"
+                required:
+                  - cryptosymbol
+                  - cryptoBlockchain
+            examples:
+              multipleAddresses:
+                summary: Request with multiple crypto addresses
+                value: [
+                  {
+                    "cryptosymbol": "USDC",
+                    "cryptoBlockchain": "Solana"
+                  },
+                  {
+                    "cryptosymbol": "USDC",
+                    "cryptoBlockchain": "Etherumn"
+                  }
+                ]
+      responses:
+        '200':
+          description: Crypto addresses generated successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cryptosymbol:
+                      type: string
+                    cryptoBlockchain:
+                      type: string
+                    Address:
+                      type: string
+              examples:
+                multipleAddressesResponse:
+                  summary: Generated crypto addresses for both requests
+                  value: [
+                    {
+                      "cryptosymbol": "USDC",
+                      "cryptoBlockchain": "Solana",
+                      "Address": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    },
+                    {
+                      "cryptosymbol": "USDC",
+                      "cryptoBlockchain": "Etherumn",
+                      "Address": "4Nd1mQCb3Q4nSpEikgHwBgycK95un1LVwGBdXrNQ6ELc"
+                    }
+                  ]
+                      
+  /update-companies:
+    post:
+      tags:
+        - ADMIN APIS
+      summary: Update Company Rates
+      description: Update company's discount rates.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CPMID:
+                  type: string
+                  format: uuid
+                  example: "0b99d577-2e23-48b9-96e8-7ff20b945f02"
+                BuydiscountRate:
+                  type: integer
+                  description: "Discount rate in basis points"
+                  example: 100
+                SelldiscountRate:
+                  type: integer
+                  description: "Discount rate in basis points"
+                  example: 100
+                SendDiscountRate:
+                  type: integer
+                  description: "Discount rate in basis points"
+                  example: 100
+              required:
+                - CPMID
+                - BuydiscountRate
+                - SelldiscountRate
+                - SendDiscountRate
+      responses:
+        '201':
+          description: Company Rates Updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Company rates updated successfully."
+  /auth:
+    post:
+      tags:
+        - Authentication
+      summary: Authenticate with API Keys {THESE WILL BE PROVIDED BY MAYA CONNECT}
+      description: Obtain an access token using API key and secret.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                apiKey:
+                  type: string
+                  example: "abcd"
+                apiSecret:
+                  type: string
+                  example: "abcd"
+              required:
+                - apiKey
+                - apiSecret
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: "JWT-TOKEN"
+                  refreshToken:
+                    type: string
+                    example: "JWT-TOKEN"
+                  expiresAt:
+                    type: integer
+                    description: "Epoch timestamp"
+                    example: 123123123
+  /rates:
+    get:
+      tags:
+        - Rates & Quotes
+      summary: Get Rates
+      description: Retrieve current rates for supported coins.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        description: Request body containing the list of coins to retrieve rates for.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              description: List of coin symbols.
+              example: ["BTC", "ETH", "SOL"]
+      responses:
+        '200':
+          description: Rates retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    coin:
+                      type: string
+                      example: "BTC"
+                    rate:
+                      type: number
+                      example: 600000
+                    Quotecurrency:
+                      type: string
+                      example: "PHP"
+                    createdAT:
+                      type: integer
+                      description: "Epoch timestamp"
+                      example: 123123123
+                    expiresAt:
+                      type: integer
+                      description: "Epoch timestamp"
+                      example: 123123125
+              examples:
+                rates:
+                  value: [
+                    {
+                      "coin": "BTC",
+                      "rate": 600000,
+                      "Quotecurrency": "PHP",
+                      "createdAT": 123123123,
+                      "expiresAt": 123123125
+                    },
+                    {
+                      "coin": "ETH",
+                      "rate": 40000,
+                      "Quotecurrency": "PHP",
+                      "createdAT": 123123124,
+                      "expiresAt": 123123126
+                    },
+                    {
+                      "coin": "SOL",
+                      "rate": 2000,
+                      "Quotecurrency": "PHP",
+                      "createdAT": 123123125,
+                      "expiresAt": 123123127
+                    }
+                  ]
+  /send-crypto-quote:
+    post:
+      tags:
+        - Rates & Quotes
+      summary: Send Crypto Quote
+      description: Create a quote for sending crypto.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        description: Request body for creating a crypto quote.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalRequestID:
+                  type: string
+                  example: "788486d6-252c-43c3-879c-17584bb5f8bd"
+                CoinSymbol:
+                  type: string
+                  example: "USDC"
+                Blockchain:
+                  type: string
+                  example: "Solana"
+                amount:
+                  type: string
+                  example: "10000.0000"
+                Address:
+                  type: string
+                  example: "6adhwh9ZfSVJpDEbcHRcc1xmoESs6JFCjHsQquLBGP12"
+                Speed:
+                  type: string
+                  example: "Medium"
+                counterpartyID:
+                  type: string
+                  example: "15584a98-7b22-4060-b6e0-aaf4251bcef1"
+                MayaMin:
+                  type: string
+                  example: "9000000001"
+                MayaUsername:
+                  type: string
+                  example: "@pranayhere"
+      responses:
+        '200':
+          description: Quote created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quotetID:
+                    type: string
+                    example: "788486d6-252c-43c3-879c-17584bb5f8bd"
+                  externalRequestID:
+                    type: string
+                    example: "788486d6-252c-43c3-879c-17584bb5f8bd"
+                  CoinSymbol:
+                    type: string
+                    example: "USDC"
+                  Blockchain:
+                    type: string
+                    example: "Solana"
+                  Address:
+                    type: string
+                    example: "6adhwh9ZfSVJpDEbcHRcc1xmoESs6JFCjHsQquLBGP12"
+                  Speed:
+                    type: string
+                    example: "Medium"
+                  counterpartyID:
+                    type: string
+                    example: "15584a98-7b22-4060-b6e0-aaf4251bcef1"
+                  TotaldebitAmount:
+                    type: number
+                    example: 100001.000
+                  Fees:
+                    type: number
+                    example: 1.0
+                  FeesCurrency:
+                    type: string
+                    example: "USDC"
+  /GetBalance:
+    get:
+      tags:
+        - Balance
+      summary: Get Balance
+      description: Retrieve current balance details for supported coins.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              description: List of coin symbols.
+              example: ["BTC", "ETH", "SOL"]
+      responses:
+        '200':
+          description: Balance retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    coinSymbol:
+                      type: string
+                      example: "BTC"
+                    coinName:
+                      type: string
+                      example: "Bitcoin"
+                    Quantity:
+                      type: number
+                      example: 600000
+                    PHPValue:
+                      type: number
+                      example: 3000000.75
+                    BalanceAsOf:
+                      type: string
+                      format: date-time
+                      example: "2023-03-24T11:00:00Z"
+              example:
+                - coinSymbol: "BTC"
+                  coinName: "Bitcoin"
+                  Quantity: 600000
+                  PHPValue: 3000000.75
+                  BalanceAsOf: "2023-03-24T11:00:00Z"
+                - coinSymbol: "ETH"
+                  coinName: "Ethereum"
+                  Quantity: 500000
+                  PHPValue: 2500000.50
+                  BalanceAsOf: "2023-03-24T11:00:00Z"
+                - coinSymbol: "SOL"
+                  coinName: "Solana"
+                  Quantity: 400000
+                  PHPValue: 2000000.25
+                  BalanceAsOf: "2023-03-24T11:00:00Z"
+                - coinSymbol: "USDC"
+                  coinName: "USD Coin"
+                  Quantity: 300000
+                  PHPValue: 1500000.00
+                  BalanceAsOf: "2023-03-24T11:00:00Z"
+                - coinSymbol: "USDT"
+                  coinName: "Tether"
+                  Quantity: 200000
+                  PHPValue: 1000000.00
+                  BalanceAsOf: "2023-03-24T11:00:00Z"
+  /GetAddress:
+    get:
+      tags:
+        - Balance
+      summary: Get Address
+      description: Retrieve address details for supported coins.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              description: List of coin symbols.
+              example: ["BTC", "ETH", "SOL"]
+      responses:
+        '200':
+          description: Address retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    coinSymbol:
+                      type: string
+                      example: "BTC"
+                    blockchain:
+                      type: string
+                      example: "BITCOIN"
+                    coinName:
+                      type: string
+                      example: "Bitcoin"
+                    Address:
+                      type: string
+                      example: "1FfmbHfnpaZjKFvyi1okTjJJusN455paPH"
+                    status:
+                      type: string
+                      example: "active"
+                    subStatus:
+                      type: string
+                      example: "Able_To_Receive_Funds"
+              example:
+                - coinSymbol: "BTC"
+                  blockchain: "BITCOIN"
+                  coinName: "Bitcoin"
+                  Address: "1FfmbHfnpaZjKFvyi1okTjJJusN455paPH"
+                  status: "active"
+                  subStatus: "Able_To_Receive_Funds"
+                - coinSymbol: "USDC"
+                  blockchain: "Solana"
+                  coinName: "USDC(Solana)"
+                  Address: "4Nd1mQCb3Q4nSpEikgHwBgycK95un1LVwGBdXrNQ6ELc"
+                  status: "active"
+                  subStatus: "Able_To_Receive_Funds"
+                - coinSymbol: "USDC"
+                  blockchain: "Etherumn"
+                  coinName: "USDC(Etherumn)"
+                  Address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                  status: "active"
+                  subStatus: "Able_To_Receive_Funds"
+  /quote-PHP:
+    post:
+      tags:
+        - Rates & Quotes
+      summary: Get Quote
+      description: >
+        Request a quote based on either incoming or outgoing currency.
+        For incoming currency, provide `incomingCurrency` and `incomingCurrencyValue`.
+        For outgoing currency, provide `outgoingCurrency`, `outgoingCurrencyValue`, and `requestCurrency`.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalRequestID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                TransactionType:
+                  type: string
+                  example: "buyCrypto"
+                QuoteCurrency:
+                  type: string
+                  example: "PHP"
+                QuoteCurrencyValue:
+                  type: number
+                  example: 10000.00
+                requestCurrency:
+                  type: string
+                  example: "USDC"
+                createdAt:
+                  type: number
+                  example: 1742795839
+                expiredAt:
+                  type: number
+                  example: 1742795900
+              oneOf:
+                - required: [ quoteID, incomingCurrency, incomingCurrencyValue, createdAt, expiredAt ]
+                - required: [ quoteID, outgoingCurrency, outgoingCurrencyValue, requestCurrency, createdAt, expiredAt ]
+      responses:
+        '200':
+          description: Quote retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quoteID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  debitCurrency:
+                    type: string
+                    example: "PHP"
+                  debitCurrencyQuantity:
+                    type: number
+                    example: 10000.00
+                  creditCurrency:
+                    type: string
+                    example: "USDC"
+                  creditCurrentQuantity:
+                    type: number
+                    example: 100
+                  createdAT:
+                    type: number
+                    example: 1742795839
+                  expiresAT:
+                    type: number
+                    example: 1742795900
+  /quote-COIN:
+    post:
+      tags:
+        - Rates & Quotes
+      summary: Get Quote
+      description: >
+        Request a quote based on either incoming or outgoing currency.
+        For incoming currency, provide `incomingCurrency` and `incomingCurrencyValue`.
+        For outgoing currency, provide `outgoingCurrency`, `outgoingCurrencyValue`, and `requestCurrency`.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quoteID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                externalRequestID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                TransactionType:
+                  type: string
+                  example: "buyCrypto"
+                QuoteCurrency:
+                  type: string
+                  example: "SOL"
+                QuoteCurrencyValue:
+                  type: number
+                  example: 10.0
+                requestCurrency:
+                  type: string
+                  example: "PHP"
+              oneOf:
+                - required: [ quoteID, incomingCurrency, incomingCurrencyValue, createdAt, expiredAt ]
+                - required: [ quoteID, outgoingCurrency, outgoingCurrencyValue, requestCurrency, createdAt, expiredAt ]
+      responses:
+        '200':
+          description: Quote retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quoteID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  debitCurrency:
+                    type: string
+                    example: "SOL"
+                  debitCurrencyQuantity:
+                    type: number
+                    example: 10.0
+                  creditCurrency:
+                    type: string
+                    example: "PHP"
+                  creditCurrencyQuantity:
+                    type: number
+                    example: 10000.00
+                  createdAT:
+                    type: number
+                    example: 1742795839
+                  expiresAT:
+                    type: number
+                    example: 1742795900
+  /execute-quote-MBM:
+    post:
+      tags:
+        - Execute Quotes
+      summary: Execute Quote
+      description: Execute a previously obtained quote.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalOrderID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                quoteID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+              required:
+                - quoteID
+      responses:
+        '200':
+          description: Quote executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quoteID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  orderID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  debitCurrency:
+                    type: string
+                    example: "USDC"
+                  debitCurrencyQuantity:
+                    type: number
+                    example: 50000
+                  creditCurrency:
+                    type: string
+                    example: "PHP"
+                  creditCurrentQuantity:
+                    type: number
+                    example: 2505000
+                  accountType:
+                    type: string
+                    example: "Business-Account"
+                  accountNumber:
+                    type: integer
+                    example: 110000001
+                  createdAt:
+                    type: integer
+                    description: "Epoch timestamp"
+                    example: 1742797177359
+                  expiresAt:
+                    type: integer
+                    description: "Epoch timestamp"
+                    example: 1742797577359
+  /execute-quote-SendCrypto:
+    post:
+      tags:
+        - Execute Quotes
+      summary: Execute Quote
+      description: Execute a previously obtained quote.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalOrderID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                quoteID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+              required:
+                - quoteID
+      responses:
+        '200':
+          description: Quote executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quoteID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  orderID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  debitCurrency:
+                    type: string
+                    example: "USDC"
+                  debitCurrencyQuantity:
+                    type: number
+                    example: 50000
+                  creditCurrency:
+                    type: string
+                    example: "PHP"
+                  cryptoBlockchain:
+                    type: string
+                    example: "Solana"
+                  cryptoAddress:
+                    type: string
+                    example: "4Nd1mQCb3Q4nSpEikgHwBgycK95un1LVwGBdXrNQ6ELc"
+                  transactionStatus:
+                    type: string
+                    example: "active"
+                  createdAt:
+                    type: number
+                    description: "Epoch timestamp"
+                    example: 1742797177359
+                  lastupdatedAt:
+                    type: number
+                    description: "Epoch timestamp"
+                    example: 1742797577359
+  /execute-quote-REMIT:
+    post:
+      tags:
+        - Execute Quotes
+      summary: Execute Quote
+      description: Execute a previously obtained quote.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalOrderID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                quoteID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                REMITArray:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      creditCurrency:
+                        type: string
+                        example: "PHP"
+                      creditQuantity:
+                        type: string
+                        example: "1000.01"
+                      rail:
+                        type: string
+                        example: "InstaPay"
+                      counterpartyID:
+                        type: string
+                        example: "f7182e28-da90-445a-9b06-d658d52294bf"
+                      railValue:
+                        type: string
+                        example: "@pranayhere"
+                  example:
+                    - creditCurrency: "PHP"
+                      creditQuantity: "1000.01"
+                      rail: "InstaPay"
+                      counterpartyID: "f7182e28-da90-445a-9b06-d658d52294bf"
+                    - creditCurrency: "PHP"
+                      creditQuantity: "1000.01"
+                      rail: "PesoNet"
+                      counterpartyID: "f7182e28-da90-445a-9b06-d658d52294bf"
+                    - creditCurrency: "PHP"
+                      creditQuantity: "1000.01"
+                      rail: "MayaUserName"
+                      railValue: "@pranayhere"
+                    - creditCurrency: "PHP"
+                      creditQuantity: "1000.01"
+                      rail: "MayaMIN"
+                      railValue: "63000000001"
+              required:
+                - quoteID
+      responses:
+        '200':
+          description: Quote executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quoteID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  orderID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  debitCurrency:
+                    type: string
+                    example: "USDC"
+                  debitCurrencyQuantity:
+                    type: number
+                    example: 50000
+                  creditCurrency:
+                    type: string
+                    example: "PHP"
+                  creditCurrentQuantity:
+                    type: number
+                    example: 2505000
+                  createdAt:
+                    type: number
+                    description: "Epoch timestamp"
+                    example: 1742797177359
+                  REMITArray:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creditCurrency:
+                          type: string
+                          example: "PHP"
+                        creditQuantity:
+                          type: string
+                          example: "1000.01"
+                        rail:
+                          type: string
+                          example: "InstaPay"
+                        paymentID:
+                          type: string
+                          example: "f7182e28-da90-445a-9b06-d658d52294bf"
+                        counterpartyID:
+                          type: string
+                          example: "f7182e28-da90-445a-9b06-d658d52294bf"
+                        railValue:
+                          type: string
+                          example: "@pranayhere"
+                    example:
+                      - creditCurrency: "PHP"
+                        creditQuantity: "1000.01"
+                        rail: "InstaPay"
+                        counterpartyID: "f7182e28-da90-445a-9b06-d658d52294bf"
+                      - creditCurrency: "PHP"
+                        creditQuantity: "1000.01"
+                        rail: "PesoNet"
+                        counterpartyID: "f7182e28-da90-445a-9b06-d658d52294bf"
+                      - creditCurrency: "PHP"
+                        creditQuantity: "1000.01"
+                        rail: "MayaUserName"
+                        railValue: "@pranayhere"
+                      - creditCurrency: "PHP"
+                        creditQuantity: "1000.01"
+                        rail: "MayaMIN"
+                        railValue: "63000000001"
+  /order-status:
+    post:
+      tags:
+        - Execute Quotes
+      summary: Execute Quote
+      description: Execute a previously obtained quote.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+              required:
+                - orderID
+      responses:
+        '200':
+          description: Quote executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quoteID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  orderID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  status:
+                    type: string
+                    example: "success"
+                  createdAt:
+                    type: number
+                    description: "Epoch timestamp"
+                    example: 1742797177359
+                  updatedAt:
+                    type: number
+                    description: "Epoch timestamp"
+                    example: 1742797277359
+  /counterparty/enquiry:
+    post:
+      tags:
+        - Counterparty
+      summary: Enquire Counterparty Details
+      description: Retrieve counterparty details using username and mobileMIN.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usernames:
+                  type: array
+                  items:
+                    type: string
+                  example: ["@pranayhere", "@neal"]
+                mobileMINs:
+                  type: array
+                  items:
+                    type: string
+                  example: ["63900000001", "63900000002"]
+              required:
+                - usernames
+                - mobileMINs
+            example:
+              usernames: ["@pranayhere", "@neal"]
+              mobileMINs: ["63900000001", "63900000002"]
+      responses:
+        '200':
+          description: Counterparty details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  counterparties:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                          example: "@pranayhere"
+                        mobileMIN:
+                          type: string
+                          example: "63900000001"
+                        status:
+                          type: string
+                          example: "active"
+                        subStatus:
+                          type: string
+                          example: "Able to send funds"
+                  response:
+                    type: string
+                    example: "exists"
+                  subresponse:
+                    type: string
+                    example: "Check individual status for details"
+              example:
+                counterparties:
+                  - username: "@pranayhere"
+                    mobileMIN: "63900000001"
+                    status: "active"
+                    subStatus: "Able to send funds"
+                  - username: "@neal"
+                    mobileMIN: "63900000002"
+                    status: "closed"
+                    subStatus: "Insufficient funds"
+  /create-counterparty:
+    post:
+      tags:
+        - Counterparty
+      summary: Create Counterparty
+      description: Create a new counterparty account.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalRequestID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                entityType:
+                  type: string
+                  example: "Originator"
+                firstName:
+                  type: string
+                  example: "Pranay"
+                middleName:
+                  type: string
+                  example: ""
+                lastName:
+                  type: string
+                  example: "Chukkala"
+                address_1:
+                  type: string
+                  example: "NewMarket Road, Brisbane, Australia."
+                address_2:
+                  type: string
+                  example: "NewMarket Road, Brisbane, Australia."
+                city:
+                  type: string
+                  example: "Brisbane"
+                country:
+                  type: string
+                  example: "AU"
+                postcode:
+                  type: number
+                  example: 50000
+                profileStatus:
+                  type: string
+                  example: "Verified"
+              required:
+                - firstName
+                - lastName
+                - address_1
+                - country
+                - city
+                - profileStatus
+      responses:
+        '201':
+          description: Counterparty created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  counterpartyID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  response:
+                    type: string
+                    example: "created"
+  /counterparty/status:
+    get:
+      tags:
+        - Counterparty
+      summary: Get Counterparty Status
+      description: Retrieve the status of a counterparty.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                counterpartyID:
+                  type: string
+                  example: "9f5c0c39-e5e6-4eac-ae5f-194310d8effa"
+      responses:
+        '200':
+          description: Payment status retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  counterpartyID:
+                    type: string
+                    example: "9f5c0c39-e5e6-4eac-ae5f-194310d8effa"
+                  status:
+                    type: string
+                    example: "Pending"
+  /counterparty/create-payment:
+    post:
+      tags:
+        - Counterparty
+      summary: Add Counterparty Payment Details
+      description: Add payment details to an existing counterparty.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalRequestID:
+                  type: string
+                  format: uuid
+                  example: "9f5c0c39-e5e6-4eac-ae5f-194310d8effa"
+                counterpartyID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                bankAccount:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      rail:
+                        type: string
+                        example: "InstaPay"
+                      bank:
+                        type: string
+                        example: "Bank Account"
+                      accountNumber:
+                        type: number
+                        example: 63900000001
+              required:
+                - externalRequestID
+                - counterpartyID
+                - bankAccount
+      responses:
+        '200':
+          description: Payment details processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "9f5c0c39-e5e6-4eac-ae5f-194310d8effa"
+                  paymentAccountID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  message:
+                    type: string
+                    example: "Payment details added successfully."
+                  error:
+                    type: string
+                    example: "MIN does not name match with the account holder"
+  /payment/self:
+    post:
+      tags:
+        - Do not Need
+      summary: Send Payment - Send to Self
+      description: Send a payment to self using a bank account.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalRequestID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                amount:
+                  type: number
+                  example: 500000.01
+              required:
+                - externalRequestID
+                - amount
+      responses:
+        '200':
+          description: Payment request sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  externalRequestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  amount:
+                    type: number
+                    example: 500000.01
+                  status:
+                    type: string
+                    example: "Success"
+                  createdAt:
+                    type: integer
+                    description: "Epoch timestamp"
+                    example: 123123
+                  expiredAt:
+                    type: integer
+                    description: "Epoch timestamp"
+                    example: 123123
+  /payment/external:
+    post:
+      tags:
+        - Do not Need
+      summary: Send Payment - Send by Different Originator
+      description: Send a payment from a different originator.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalRequestID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                paymentAccountID:
+                  type: string
+                  format: uuid
+                  example: "9f5c0c39-e5e6-4eac-ae5f-194310d8effa"
+              required:
+                - paymentAccountID
+      responses:
+        '200':
+          description: Payment request sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  bankAccountID:
+                    type: string
+                    format: uuid
+                    example: "9f5c0c39-e5e6-4eac-ae5f-194310d8effa"
+                  status:
+                    type: string
+                    example: "Pending"
+  /transaction/status:
+    get:
+      tags:
+        - Payments
+      summary: Get Send Status
+      description: Retrieve the status of a payment.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction-hash:
+                  type: string
+                  example: "0xe47588f086bc7e34d59638ed2ee3cca2d5becffb788b75c06c1779c765f30251"
+      responses:
+        '200':
+          description: Payment status retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction-hash:
+                    type: string
+                    example: "0xe47588f086bc7e34d59638ed2ee3cca2d5becffb788b75c06c1779c765f30251"
+                  blockchainStatus:
+                    type: string
+                    example: "success"
+                  creditStatus:
+                    type: string
+                    example: "fundsCredited"
+                  creditDateTime:
+                    type: number
+                    example: 1742799244
+                  lastupdatedAt:
+                    type: number
+                    example: 1742799244
+  /payment/status:
+    get:
+      tags:
+        - Payments
+      summary: Get Send Status
+      description: Retrieve the status of a payment.
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/IdempotencyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paymentID:
+                  type: string
+                  format: uuid
+                  example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+      responses:
+        '200':
+          description: Payment status retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentID:
+                    type: string
+                    format: uuid
+                    example: "bfa743e0-6b19-450d-8db0-8cd6f98e2fbf"
+                  status:
+                    type: string
+                    example: "Pending"
+components:
+  parameters:
+    AuthHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: Bearer token for authentication.
+      schema:
+        type: string
+    IdempotencyHeader:
+      name: IdempotencyKey
+      in: header
+      required: true
+      description: Idempotency key (UUID).
+      schema:
+        type: string
+        format: uuid

@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+elliptic-python
+boto3
+pandas
+sqlalchemy
+psycopg2-binary
