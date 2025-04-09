@@ -13,13 +13,15 @@ cumul = trades
   |> cumulativeSum(columns: ["cost", "quantity"])
   // Aggregate per day; this gets the last cumulative value for each day
   |> aggregateWindow(every: 1d, fn: last, createEmpty: true)
-  // If any day is missing a new value, fill with previous values
+  // If any day is missing a new value, fill with previous values.
   |> fill(column: "cost", usePrevious: true)
   |> fill(column: "quantity", usePrevious: true)
 
 avgCost = cumul
   |> map(fn: (r) => ({
        _time: r._time,
+       // Set the measurement for the output records
+       _measurement: "daily_avg_cost", 
        avgCost: r.cost / r.quantity,
        asset: r.asset
   }))
@@ -27,6 +29,5 @@ avgCost = cumul
 avgCost
   |> to(
     bucket: "home",
-    org: "docs",
-    measurement: "daily_avg_cost"
+    org: "docs"
   )
