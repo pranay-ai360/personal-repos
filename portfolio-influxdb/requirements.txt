@@ -1,0 +1,4 @@
+influxdb-client>=1.34.0
+
+## For Query 
+pandas>=1.3.0
