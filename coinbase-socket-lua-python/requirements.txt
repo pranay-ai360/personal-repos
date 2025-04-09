@@ -1,0 +1,31 @@
+asyncio
+websockets
+tabulate
+redis
+
+## for quote 
+
+fastapi
+uvicorn
+redis
+pydantic
+python-dotenv
+
+## For order 
+
+requests
+
+##FOR ticker
+confluent-kafka
+
+
+## FOr Influx DB 
+
+kafka
+influxdb
+kafka-python
+influxdb_client
+
+
+## For matching engine 
+aiohttp
