@@ -21,3 +21,4 @@ clickhouse/plugins/
 socket/node_modules
 socket-lua-python/__pycache__/
 __pycache__
+go.sum
