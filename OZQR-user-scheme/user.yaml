@@ -1,0 +1,139 @@
+schemeVersion: 1.0.0
+user:
+  englishName:
+    title: "Mr"
+    preferredName: "Johnny"
+    fullName: "John Nicolas Smith"
+    firstName: "John"
+    midddleName: "Nicolas"
+    lastName: "Smith"
+  arabicName:
+    fullName: "جون نيكولاس سميث"
+    firstName: "جون"
+    midddleName: "نيكولاس"
+    lastName: "سميث"
+    encoding: "ISO/IEC 8859-6"
+  changedName: True
+  previousNames:
+    - firstName: "John"
+      middleName: "Nicolas"
+      lastName: "Sampson"
+  contact:
+    emails:
+      - type: personal
+        address: "john.smith@example.com"
+      - type: work
+        address: "johnny.n.smith@workmail.com"
+    phones:
+      mobile:
+        phone: "0412345678"
+        countryCode: "61"
+        country: "Australia"
+        iso3166TwoLetter: "AU"
+        iso3166ThreeLetter: "AUS"
+      home:
+        phone: "0734567890"
+        countryCode: "61"
+        country: "Australia"
+        iso3166TwoLetter: "AU"
+        iso3166ThreeLetter: "AUS"
+      work:
+        phone: "0789123456"
+        countryCode: "61"
+        country: "Australia"
+        iso3166TwoLetter: "AU"
+        iso3166ThreeLetter: "AUS"
+  addresses:
+    - addressType: home
+      addressLine1: "123 King Street"
+      addressLine2: "Unit 5"
+      country: "Australia"
+      iso3166TwoLetter: "AU"
+      iso3166ThreeLetter: "AUS"
+      state: "Queensland"
+      city: "Brisbane"
+      postalCode: "4000"
+      countryCode: "61"
+      current: true
+      permanent: true
+      stayPeriod:
+        month: "March"
+        year: "2023"
+    - addressType: work
+      addressLine1: "456 Queen Street"
+      addressLine2: "Apartment 12"
+      country: "Australia"
+      iso3166TwoLetter: "AU"
+      iso3166ThreeLetter: "AUS"
+      state: "Queensland"
+      city: "Gold Coast"
+      postalCode: "4217"
+      countryCode: "61"
+      current: true
+      permanent: true
+      stayPeriod:
+        month: "April"
+        year: "2023"
+  identificationDetails:
+    - identificationSHA256: "23048a413ed383c555a228ecde65536537793e0aef6b8a704ecca20030908af5"
+      identificationVerificationStatus: "verified"
+      identificationVerificationCheckVendor: "GreenID-AUS"
+      identificationVerificationCheckVendorCountry: "Australia"
+      details:
+        - identificationType: "driverLicense"
+          identificationNumber: "QLD1234567"
+          identificationCardNumber: "DLQLD1234567"
+          identificationExpiryDate: "2025-12-31"
+          identificationIssueDate: "2020-01-01"
+          identificationIssuedBy: "Queensland Department of Transport and Main Roads"
+          identificationIssuedByCountry: "Australia"
+          iso3166TwoLetter: "AU"
+          iso3166ThreeLetter: "AUS"
+    - identificationSHA256: "23048a413ed383c555a228ecde65536537793e0aef6b8a704ecca20030908af5"
+      identificationVerificationStatus: "verified"
+      identificationVerificationCheckVendor: "GreenID-AUS"
+      identificationVerificationCheckVendorCountry: "Australia"
+      details:
+        - identificationType: "passport"
+          identificationNumber: "A987654321"
+          identificationCardNumber: "A987654321"
+          identificationExpiryDate: "2030-05-15"
+          identificationIssueDate: "2020-06-20"
+          identificationIssuedBy: "Australian Passport Office"
+          identificationIssuedByCountry: "Australia"
+          iso3166TwoLetter: "AU"
+          iso3166ThreeLetter: "AUS"
+    - identificationSHA256: "23048a413ed383c555a228ecde65536537793e0aef6b8a704ecca20030908af5"
+      identificationVerificationStatus: "verified"
+      identificationVerificationCheckVendor: "GreenID-AUS"
+      identificationVerificationCheckVendorCountry: "Australia"
+      details:
+        - identificationType: "passport"
+          identificationNumber: "UAE987654321"
+          identificationCardNumber: "UAE987654321"
+          identificationExpiryDate: "2032-07-07"
+          identificationIssueDate: "2022-01-01"
+          identificationIssuedBy: "UAE Federal Authority for Identity and Citizenship"
+          identificationIssuedByCountry: "United Arab Emirates"
+          iso3166TwoLetter: "AE"
+          iso3166ThreeLetter: "ARE"
+    - identificationSHA256: "c2d4c731375f348947ea4d6b32b868895f6cd14cbaa54d63197e0445a5cc3c25"
+      identificationVerificationStatus: "verified"
+      identificationVerificationCheckVendor: "GreenID-AUS"
+      identificationVerificationCheckVendorCountry: "Australia"
+      details:
+        - identificationType: "passport"
+          identificationNumber: "NZ123456789"
+          identificationCardNumber: "NZ123456789"
+          passportHolderName: "John Nicolas Smith"
+          dateOfBirth: "1985-05-15"
+          gender: "M"
+          nationality: "New Zealand"
+          placeOfBirth: "Auckland, New Zealand"
+          identificationExpiryDate: "2030-12-31"
+          identificationIssueDate: "2021-05-20"
+          identificationIssuedBy: "New Zealand Passport Office"
+          identificationIssuedByCountry: "New Zealand"
+          iso3166TwoLetter: "NZ"
+          iso3166ThreeLetter: "NZL"
+          documentCode: "P"

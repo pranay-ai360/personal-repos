@@ -1,0 +1,36 @@
+# Stage 1: Build the Go application
+FROM golang:1.21 AS builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Install any dependencies if needed (uncomment git if required)
+# RUN apk update && apk add --no-cache git
+
+# # Copy go module files first to leverage Docker cache for dependencies
+# COPY go.mod go.sum ./
+# RUN go mod download
+
+# Copy the rest of the application source code
+COPY . .
+
+# # Build the Go binary (static linking for Linux)
+# RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o mdclient .
+
+# # Stage 2: Create a minimal runtime image
+# FROM alpine:latest
+
+# # Install CA certificates in case your app makes HTTPS requests
+# RUN apk --no-cache add ca-certificates
+
+# # Set the working directory for the runtime container
+# WORKDIR /app
+
+# # Copy the compiled binary from the builder stage
+# COPY --from=builder /app/mdclient .
+
+# Expose any port if your application listens on one (adjust if needed)
+EXPOSE 8080
+
+# Command to run the binary
+CMD ["./mdclient"]

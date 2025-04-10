@@ -40,6 +40,9 @@ services:
       INFLUXDB_URL: "http://influxdb2:8086"
     command: sleep infinity
 
+
+
+
 volumes:
   influxdb2-data:
   influxdb2-config:

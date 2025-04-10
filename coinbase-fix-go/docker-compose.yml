@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  golang-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.golang
+    environment:
+      - API_KEY=24ab46f784d1b20db435b852086e3250
+      - PASSPHRASE=akmwnltyfgb
+      - SECRET_KEY=P8npGsgqjYbgeI7chrkVNHxASkL44hEIUyizOzVBvn7lzjeGhrGnZl3X+wgPb81S01Gg6+VTNlsa8+mIrz4YKw==
+      - SVC_ACCOUNTID=24ab46f784d1b20db435b852086e3250
+      - FIX_VERSION=FIXT.1.1
+      - DEFAULT_APPL_VER_ID=9
+      - TARGET_COMP_ID=Coinbase
+      # Optional variables can be uncommented if needed:
+      - FIX_HOST=fix-md.sandbox.exchange.coinbase.com
+      - FIX_PORT=6121
+      - LOG_PATH=./GoLogs/
+      - SESSION_PATH=./.go_sessions/
+    volumes:
+      - .:/app
+    command: sleep infinity

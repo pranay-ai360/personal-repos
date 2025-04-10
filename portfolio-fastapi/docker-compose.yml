@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  influxdb2:
+    build:
+      context: .
+      dockerfile: Dockerfile.influxdb
+    ports:
+      - "8086:8086"
+    env_file:
+      - .env
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB2_ADMIN_USERNAME}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB2_ADMIN_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB2_ADMIN_TOKEN}
+      DOCKER_INFLUXDB_INIT_ORG: docs
+      DOCKER_INFLUXDB_INIT_BUCKET: home
+    volumes:
+      - .:/app
+      - type: volume
+        source: influxdb2-data
+        target: /var/lib/influxdb2
+      - type: volume
+        source: influxdb2-config
+        target: /etc/influxdb2
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    volumes:
+      - .:/app
+    ports:
+      - "8005:8005"
+    platform: linux/amd64
+    depends_on:
+      - influxdb2
+      - postgres
+    environment:
+      INFLUXDB_URL: "http://influxdb2:8086"
+    command: uvicorn main:app --host 0.0.0.0 --port 8005 --reload
+
+  # PostgreSQL service
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+
+
+volumes:
+  influxdb2-data:
+  influxdb2-config:
+  postgres-data:
+    driver: local
