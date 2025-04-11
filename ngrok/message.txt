@@ -1,0 +1,405 @@
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "430eee4c-f658-419e-97b2-40715c290e69", "symbol": "BTC-USD", "price": 3.35, "size": 0.58757062, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "430eee4c-f658-419e-97b2-40715c290e69", "symbol": "BTC-USD", "price": 3.54, "size": 0.58757062, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "6857888c-5a50-40cf-9ef4-35ae686c2607", "symbol": "BTC-USD", "price": 3.55, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "8413d8d5-6d70-4b09-9ce8-28a21b96c27d", "symbol": "BTC-USD", "price": 3.55, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 200
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "87463ab3-8e47-4b9f-a6a9-5f9a9cf7779e", "symbol": "BTC-USD", "price": 3.3, "size": 0.61971831, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "87463ab3-8e47-4b9f-a6a9-5f9a9cf7779e", "symbol": "BTC-USD", "price": 3.54, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "9df34577-ffb6-4db2-bb5e-089a288de596", "symbol": "BTC-USD", "price": 3.55, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 200
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "7f20882b-168c-473a-953d-86a706654623", "symbol": "BTC-USD", "price": 3.3, "size": 0.62146893, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "7f20882b-168c-473a-953d-86a706654623", "symbol": "BTC-USD", "price": 3.54, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "c9fbb708-bb0a-4540-ae82-bde6e5b7ea2b", "symbol": "BTC-USD", "price": 3.25, "size": 0.62146893, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "c9fbb708-bb0a-4540-ae82-bde6e5b7ea2b", "symbol": "BTC-USD", "price": 3.54, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "1202076c-16a0-406c-b7d0-6d8e77725348", "symbol": "BTC-USD", "price": 3.55, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "f61a4d20-1791-45b3-9146-a6ff4f374e48", "symbol": "BTC-USD", "price": 3.55, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "3026e0a5-a48b-41f6-b8ca-678d1d1785c9", "symbol": "BTC-USD", "price": 3.23, "size": 0.61971831, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "3026e0a5-a48b-41f6-b8ca-678d1d1785c9", "symbol": "BTC-USD", "price": 3.54, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "091080f1-5fee-4289-a81f-4a6ca9323815", "symbol": "BTC-USD", "price": 3.55, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "8c06160c-4eb3-4717-bd12-f7b8e89db253", "symbol": "BTC-USD", "price": 3.24, "size": 0.62146893, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "8c06160c-4eb3-4717-bd12-f7b8e89db253", "symbol": "BTC-USD", "price": 3.54, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "f6fccd6c-448e-4b72-9a5a-d6318eea54dc", "symbol": "BTC-USD", "price": 3.25, "size": 0.62146893, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "f6fccd6c-448e-4b72-9a5a-d6318eea54dc", "symbol": "BTC-USD", "price": 3.54, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "ffc67d29-2f8a-4231-98f2-4cc1db47a5bd", "symbol": "BTC-USD", "price": 3.55, "size": 0.62146893, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "21772feb-25b2-401f-b250-86f34860f323", "symbol": "BTC-USD", "price": 3.26, "size": 0.61971831, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "21772feb-25b2-401f-b250-86f34860f323", "symbol": "BTC-USD", "price": 3.54, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "ccb26702-d091-4bcb-a33e-473a63239fc8", "symbol": "BTC-USD", "price": 3.55, "size": 0.61971831, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 200
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "d7248bb1-6e6f-45cd-9e19-bdbc8bdb2fd0", "symbol": "BTC-USD", "price": 3.55, "size": 0.6644565, "side": "ASK"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "d222b4a9-940e-4bb4-8077-9ce7a584ee15", "symbol": "BTC-USD", "price": 3.26, "size": 0.61971831, "side": "BID"}
+----------------------------------------
+Received POST request:
+Path: /
+Headers:
+  Host: 65f7-111-220-49-33.ngrok-free.app
+  User-Agent: python-requests/2.32.3
+  Content-Length: 201
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/json
+  X-Forwarded-For: 111.220.49.33
+  X-Forwarded-Host: 65f7-111-220-49-33.ngrok-free.app
+  X-Forwarded-Proto: https
+Body:
+{"command": "PLACE_ORDER", "orderType": "GTC", "userId": 1, "userType": "MM", "orderUUID": "d222b4a9-940e-4bb4-8077-9ce7a584ee15", "symbol": "BTC-USD", "price": 3.54, "size": 0.61971831, "side": "ASK"}
+----------------------------------------

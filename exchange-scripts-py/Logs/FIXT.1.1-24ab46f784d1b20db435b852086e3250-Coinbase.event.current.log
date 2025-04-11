@@ -1,0 +1,452 @@
+20250411-01:46:45.941619000 : Created session
+20250411-01:46:45.964021000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:46:46.910028000 : Initiated logon request
+20250411-01:46:47.164035000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:46:47.165238000 : Received logon response
+20250411-01:46:52.151804000 : Initiated logout request
+20250411-01:50:18.890009000 : Created session
+20250411-01:50:18.911800000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:50:19.673232000 : Initiated logon request
+20250411-01:50:19.930744000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:50:19.931813000 : Received logon response
+20250411-01:51:27.778802000 : Created session
+20250411-01:51:27.808116000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:51:28.636464000 : Initiated logon request
+20250411-01:51:28.894197000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:51:28.894584000 : Received logon response
+20250411-01:51:35.568455000 : Message 60 Rejected: Tag appears more than once:269
+20250411-01:51:35.569613000 : Message 61 Rejected: Tag appears more than once:269
+20250411-01:51:35.570235000 : Message 62 Rejected: Tag appears more than once:269
+20250411-01:51:35.570827000 : Message 63 Rejected: Tag appears more than once:269
+20250411-01:51:35.571441000 : Message 64 Rejected: Tag appears more than once:269
+20250411-01:51:35.571954000 : Message 65 Rejected: Tag appears more than once:269
+20250411-01:51:35.572499000 : Message 66 Rejected: Tag appears more than once:269
+20250411-01:51:35.796497000 : Message 67 Rejected: Tag appears more than once:269
+20250411-01:51:35.797411000 : Message 68 Rejected: Tag appears more than once:269
+20250411-01:51:35.798126000 : Message 69 Rejected: Tag appears more than once:269
+20250411-01:51:35.798735000 : Message 70 Rejected: Tag appears more than once:269
+20250411-01:51:35.799442000 : Message 71 Rejected: Tag appears more than once:269
+20250411-01:51:35.800127000 : Message 72 Rejected: Tag appears more than once:269
+20250411-01:51:35.800720000 : Message 73 Rejected: Tag appears more than once:269
+20250411-01:51:35.801458000 : Message 74 Rejected: Tag appears more than once:269
+20250411-01:51:35.802019000 : Message 75 Rejected: Tag appears more than once:269
+20250411-01:51:35.802599000 : Message 76 Rejected: Tag appears more than once:269
+20250411-01:51:35.803119000 : Message 77 Rejected: Tag appears more than once:269
+20250411-01:51:35.803662000 : Message 78 Rejected: Tag appears more than once:269
+20250411-01:51:35.804181000 : Message 79 Rejected: Tag appears more than once:269
+20250411-01:51:35.804687000 : Message 80 Rejected: Tag appears more than once:269
+20250411-01:51:35.805307000 : Message 81 Rejected: Tag appears more than once:269
+20250411-01:51:35.805856000 : Message 82 Rejected: Tag appears more than once:269
+20250411-01:51:35.806478000 : Message 83 Rejected: Tag appears more than once:269
+20250411-01:51:35.807035000 : Message 84 Rejected: Tag appears more than once:269
+20250411-01:51:35.807768000 : Message 85 Rejected: Tag appears more than once:269
+20250411-01:51:35.808385000 : Message 86 Rejected: Tag appears more than once:269
+20250411-01:51:35.808965000 : Message 87 Rejected: Tag appears more than once:269
+20250411-01:51:35.809635000 : Message 88 Rejected: Tag appears more than once:269
+20250411-01:51:35.810093000 : Message 89 Rejected: Tag appears more than once:269
+20250411-01:51:35.810573000 : Message 90 Rejected: Tag appears more than once:269
+20250411-01:51:35.811206000 : Message 91 Rejected: Tag appears more than once:269
+20250411-01:51:35.812466000 : Message 92 Rejected: Tag appears more than once:269
+20250411-01:51:35.813552000 : Message 93 Rejected: Tag appears more than once:269
+20250411-01:51:35.814322000 : Message 94 Rejected: Tag appears more than once:269
+20250411-01:51:35.814971000 : Message 95 Rejected: Tag appears more than once:269
+20250411-01:51:35.816414000 : Message 96 Rejected: Tag appears more than once:269
+20250411-01:51:35.818581000 : Message 97 Rejected: Tag appears more than once:269
+20250411-01:51:36.025239000 : Message 98 Rejected: Tag appears more than once:269
+20250411-01:51:36.026588000 : Message 99 Rejected: Tag appears more than once:269
+20250411-01:51:36.027596000 : Message 100 Rejected: Tag appears more than once:269
+20250411-01:51:36.028250000 : Message 101 Rejected: Tag appears more than once:269
+20250411-01:51:36.029009000 : Message 102 Rejected: Tag appears more than once:269
+20250411-01:51:36.029529000 : Message 103 Rejected: Tag appears more than once:269
+20250411-01:51:46.832409000 : Initiated logout request
+20250411-01:51:47.070487000 : Received logout response
+20250411-01:51:47.070754000 : Disconnecting
+20250411-01:51:54.634520000 : Created session
+20250411-01:51:54.662713000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:51:55.649220000 : Initiated logon request
+20250411-01:51:55.903620000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:51:55.904668000 : Received logon response
+20250411-01:51:58.814633000 : Initiated logout request
+20250411-01:52:14.644822000 : Created session
+20250411-01:52:14.670395000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:52:15.405572000 : Initiated logon request
+20250411-01:52:15.659950000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:52:15.660998000 : Received logon response
+20250411-01:52:20.734984000 : Initiated logout request
+20250411-01:57:15.892166000 : Created session
+20250411-01:57:15.916245000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:57:16.884877000 : Initiated logon request
+20250411-01:57:17.140788000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:57:17.141788000 : Received logon response
+20250411-01:57:23.667948000 : Message 80 Rejected: Tag appears more than once:269
+20250411-01:57:23.669098000 : Message 81 Rejected: Tag appears more than once:269
+20250411-01:57:23.669739000 : Message 82 Rejected: Tag appears more than once:269
+20250411-01:57:23.670353000 : Message 83 Rejected: Tag appears more than once:269
+20250411-01:57:23.671134000 : Message 84 Rejected: Tag appears more than once:269
+20250411-01:57:23.675407000 : Message 85 Rejected: Tag appears more than once:269
+20250411-01:57:23.680843000 : Message 86 Rejected: Tag appears more than once:269
+20250411-01:57:23.681869000 : Message 87 Rejected: Tag appears more than once:269
+20250411-01:57:23.683428000 : Message 88 Rejected: Tag appears more than once:269
+20250411-01:57:23.890924000 : Message 89 Rejected: Tag appears more than once:269
+20250411-01:57:23.896600000 : Message 90 Rejected: Tag appears more than once:269
+20250411-01:57:23.897467000 : Message 91 Rejected: Tag appears more than once:269
+20250411-01:57:23.898093000 : Message 92 Rejected: Tag appears more than once:269
+20250411-01:57:23.898855000 : Message 93 Rejected: Tag appears more than once:269
+20250411-01:57:23.899528000 : Message 94 Rejected: Tag appears more than once:269
+20250411-01:57:23.900260000 : Message 95 Rejected: Tag appears more than once:269
+20250411-01:57:23.900914000 : Message 96 Rejected: Tag appears more than once:269
+20250411-01:57:23.901557000 : Message 97 Rejected: Tag appears more than once:269
+20250411-01:57:23.902472000 : Message 98 Rejected: Tag appears more than once:269
+20250411-01:57:23.903271000 : Message 99 Rejected: Tag appears more than once:269
+20250411-01:57:23.903985000 : Message 100 Rejected: Tag appears more than once:269
+20250411-01:57:23.904649000 : Message 101 Rejected: Tag appears more than once:269
+20250411-01:57:23.905573000 : Message 102 Rejected: Tag appears more than once:269
+20250411-01:57:23.906443000 : Message 103 Rejected: Tag appears more than once:269
+20250411-01:57:23.907258000 : Message 104 Rejected: Tag appears more than once:269
+20250411-01:57:23.908092000 : Message 105 Rejected: Tag appears more than once:269
+20250411-01:57:23.908864000 : Message 106 Rejected: Tag appears more than once:269
+20250411-01:57:23.909597000 : Message 107 Rejected: Tag appears more than once:269
+20250411-01:57:23.910155000 : Message 108 Rejected: Tag appears more than once:269
+20250411-01:57:23.910664000 : Message 109 Rejected: Tag appears more than once:269
+20250411-01:57:23.911125000 : Message 110 Rejected: Tag appears more than once:269
+20250411-01:57:23.911747000 : Message 111 Rejected: Tag appears more than once:269
+20250411-01:57:23.912590000 : Message 112 Rejected: Tag appears more than once:269
+20250411-01:57:23.913240000 : Message 113 Rejected: Tag appears more than once:269
+20250411-01:57:23.913876000 : Message 114 Rejected: Tag appears more than once:269
+20250411-01:57:23.914555000 : Message 115 Rejected: Tag appears more than once:269
+20250411-01:57:24.119994000 : Message 116 Rejected: Tag appears more than once:269
+20250411-01:57:24.120843000 : Message 117 Rejected: Tag appears more than once:269
+20250411-01:57:24.121679000 : Message 118 Rejected: Tag appears more than once:269
+20250411-01:57:24.122483000 : Message 119 Rejected: Tag appears more than once:269
+20250411-01:57:24.127600000 : Message 120 Rejected: Tag appears more than once:269
+20250411-01:57:24.128613000 : Message 121 Rejected: Tag appears more than once:269
+20250411-01:57:24.131748000 : Message 122 Rejected: Tag appears more than once:269
+20250411-01:58:08.927098000 : Created session
+20250411-01:58:08.954254000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:58:09.675055000 : Initiated logon request
+20250411-01:58:09.929330000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:58:09.930366000 : Received logon response
+20250411-01:58:16.198356000 : Message 43 Rejected: Tag appears more than once:269
+20250411-01:58:16.199871000 : Message 44 Rejected: Tag appears more than once:269
+20250411-01:58:16.201289000 : Message 45 Rejected: Tag appears more than once:269
+20250411-01:58:16.202262000 : Message 46 Rejected: Tag appears more than once:269
+20250411-01:58:16.202880000 : Message 47 Rejected: Tag appears more than once:269
+20250411-01:58:16.203554000 : Message 48 Rejected: Tag appears more than once:269
+20250411-01:58:16.204274000 : Message 49 Rejected: Tag appears more than once:269
+20250411-01:58:16.205059000 : Message 50 Rejected: Tag appears more than once:269
+20250411-01:58:16.205899000 : Message 51 Rejected: Tag appears more than once:269
+20250411-01:58:16.206630000 : Message 52 Rejected: Tag appears more than once:269
+20250411-01:58:16.403633000 : Message 53 Rejected: Tag appears more than once:269
+20250411-01:58:16.422755000 : Message 54 Rejected: Tag appears more than once:269
+20250411-01:58:16.423771000 : Message 55 Rejected: Tag appears more than once:269
+20250411-01:58:16.424627000 : Message 56 Rejected: Tag appears more than once:269
+20250411-01:58:16.425361000 : Message 57 Rejected: Tag appears more than once:269
+20250411-01:58:16.426239000 : Message 58 Rejected: Tag appears more than once:269
+20250411-01:58:16.427202000 : Message 59 Rejected: Tag appears more than once:269
+20250411-01:58:16.428022000 : Message 60 Rejected: Tag appears more than once:269
+20250411-01:58:16.428878000 : Message 61 Rejected: Tag appears more than once:269
+20250411-01:58:16.429968000 : Message 62 Rejected: Tag appears more than once:269
+20250411-01:58:16.430643000 : Message 63 Rejected: Tag appears more than once:269
+20250411-01:58:16.431159000 : Message 64 Rejected: Tag appears more than once:269
+20250411-01:58:16.431767000 : Message 65 Rejected: Tag appears more than once:269
+20250411-01:58:16.432536000 : Message 66 Rejected: Tag appears more than once:269
+20250411-01:58:16.433257000 : Message 67 Rejected: Tag appears more than once:269
+20250411-01:58:16.434026000 : Message 68 Rejected: Tag appears more than once:269
+20250411-01:58:16.434883000 : Message 69 Rejected: Tag appears more than once:269
+20250411-01:58:16.435586000 : Message 70 Rejected: Tag appears more than once:269
+20250411-01:58:16.436190000 : Message 71 Rejected: Tag appears more than once:269
+20250411-01:58:16.436808000 : Message 72 Rejected: Tag appears more than once:269
+20250411-01:58:16.437357000 : Message 73 Rejected: Tag appears more than once:269
+20250411-01:58:16.438007000 : Message 74 Rejected: Tag appears more than once:269
+20250411-01:58:16.438676000 : Message 75 Rejected: Tag appears more than once:269
+20250411-01:58:16.439647000 : Message 76 Rejected: Tag appears more than once:269
+20250411-01:58:16.440651000 : Message 77 Rejected: Tag appears more than once:269
+20250411-01:58:16.441473000 : Message 78 Rejected: Tag appears more than once:269
+20250411-01:58:16.442278000 : Message 79 Rejected: Tag appears more than once:269
+20250411-01:58:16.635106000 : Message 80 Rejected: Tag appears more than once:269
+20250411-01:58:16.636463000 : Message 81 Rejected: Tag appears more than once:269
+20250411-01:58:16.637588000 : Message 82 Rejected: Tag appears more than once:269
+20250411-01:58:16.638580000 : Message 83 Rejected: Tag appears more than once:269
+20250411-01:58:16.648460000 : Message 84 Rejected: Tag appears more than once:269
+20250411-01:58:16.649461000 : Message 85 Rejected: Tag appears more than once:269
+20250411-01:58:16.650229000 : Message 86 Rejected: Tag appears more than once:269
+20250411-01:58:35.689172000 : Initiated logout request
+20250411-01:59:51.084689000 : Created session
+20250411-01:59:51.110738000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-01:59:51.887391000 : Initiated logon request
+20250411-01:59:52.222261000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-01:59:52.224642000 : Received logon response
+20250411-01:59:58.862534000 : Message 111 Rejected: Tag appears more than once:269
+20250411-01:59:58.863856000 : Message 112 Rejected: Tag appears more than once:269
+20250411-01:59:58.864610000 : Message 113 Rejected: Tag appears more than once:269
+20250411-01:59:58.865402000 : Message 114 Rejected: Tag appears more than once:269
+20250411-01:59:58.866064000 : Message 115 Rejected: Tag appears more than once:269
+20250411-01:59:58.866854000 : Message 116 Rejected: Tag appears more than once:269
+20250411-01:59:58.867511000 : Message 117 Rejected: Tag appears more than once:269
+20250411-01:59:58.868013000 : Message 118 Rejected: Tag appears more than once:269
+20250411-01:59:58.868586000 : Message 119 Rejected: Tag appears more than once:269
+20250411-01:59:58.869093000 : Message 120 Rejected: Tag appears more than once:269
+20250411-01:59:58.869695000 : Message 121 Rejected: Tag appears more than once:269
+20250411-01:59:58.870200000 : Message 122 Rejected: Tag appears more than once:269
+20250411-01:59:58.871360000 : Message 123 Rejected: Tag appears more than once:269
+20250411-01:59:58.988587000 : Message 124 Rejected: Tag appears more than once:269
+20250411-01:59:58.989656000 : Message 125 Rejected: Tag appears more than once:269
+20250411-01:59:59.040620000 : Message 126 Rejected: Tag appears more than once:269
+20250411-01:59:59.041654000 : Message 127 Rejected: Tag appears more than once:269
+20250411-01:59:59.042608000 : Message 128 Rejected: Tag appears more than once:269
+20250411-01:59:59.088572000 : Message 129 Rejected: Tag appears more than once:269
+20250411-01:59:59.089175000 : Message 130 Rejected: Tag appears more than once:269
+20250411-01:59:59.089832000 : Message 131 Rejected: Tag appears more than once:269
+20250411-01:59:59.090381000 : Message 132 Rejected: Tag appears more than once:269
+20250411-01:59:59.090981000 : Message 133 Rejected: Tag appears more than once:269
+20250411-01:59:59.091627000 : Message 134 Rejected: Tag appears more than once:269
+20250411-01:59:59.092359000 : Message 135 Rejected: Tag appears more than once:269
+20250411-01:59:59.092862000 : Message 136 Rejected: Tag appears more than once:269
+20250411-01:59:59.093348000 : Message 137 Rejected: Tag appears more than once:269
+20250411-01:59:59.093957000 : Message 138 Rejected: Tag appears more than once:269
+20250411-01:59:59.094413000 : Message 139 Rejected: Tag appears more than once:269
+20250411-01:59:59.094948000 : Message 140 Rejected: Tag appears more than once:269
+20250411-01:59:59.095599000 : Message 141 Rejected: Tag appears more than once:269
+20250411-01:59:59.096200000 : Message 142 Rejected: Tag appears more than once:269
+20250411-01:59:59.096748000 : Message 143 Rejected: Tag appears more than once:269
+20250411-01:59:59.097245000 : Message 144 Rejected: Tag appears more than once:269
+20250411-01:59:59.098033000 : Message 145 Rejected: Tag appears more than once:269
+20250411-01:59:59.098754000 : Message 146 Rejected: Tag appears more than once:269
+20250411-01:59:59.099487000 : Message 147 Rejected: Tag appears more than once:269
+20250411-01:59:59.100261000 : Message 148 Rejected: Tag appears more than once:269
+20250411-01:59:59.100974000 : Message 149 Rejected: Tag appears more than once:269
+20250411-01:59:59.101599000 : Message 150 Rejected: Tag appears more than once:269
+20250411-01:59:59.102229000 : Message 151 Rejected: Tag appears more than once:269
+20250411-01:59:59.103055000 : Message 152 Rejected: Tag appears more than once:269
+20250411-01:59:59.103631000 : Message 153 Rejected: Tag appears more than once:269
+20250411-02:00:04.307965000 : Initiated logout request
+20250411-02:00:19.881089000 : Created session
+20250411-02:00:19.926834000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-02:00:20.650126000 : Initiated logon request
+20250411-02:00:20.908784000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-02:00:20.909829000 : Received logon response
+20250411-02:00:27.180818000 : Message 27 Rejected: Tag appears more than once:269
+20250411-02:00:27.182189000 : Message 28 Rejected: Tag appears more than once:269
+20250411-02:00:27.182948000 : Message 29 Rejected: Tag appears more than once:269
+20250411-02:00:27.183862000 : Message 30 Rejected: Tag appears more than once:269
+20250411-02:00:27.184739000 : Message 31 Rejected: Tag appears more than once:269
+20250411-02:00:27.185529000 : Message 32 Rejected: Tag appears more than once:269
+20250411-02:00:27.186598000 : Message 33 Rejected: Tag appears more than once:269
+20250411-02:00:27.187344000 : Message 34 Rejected: Tag appears more than once:269
+20250411-02:00:27.188374000 : Message 35 Rejected: Tag appears more than once:269
+20250411-02:00:27.189119000 : Message 36 Rejected: Tag appears more than once:269
+20250411-02:00:27.190385000 : Message 37 Rejected: Tag appears more than once:269
+20250411-02:00:27.206266000 : Message 38 Rejected: Tag appears more than once:269
+20250411-02:00:27.207054000 : Message 39 Rejected: Tag appears more than once:269
+20250411-02:00:27.207656000 : Message 40 Rejected: Tag appears more than once:269
+20250411-02:00:27.208275000 : Message 41 Rejected: Tag appears more than once:269
+20250411-02:00:27.218820000 : Message 42 Rejected: Tag appears more than once:269
+20250411-02:00:27.219709000 : Message 43 Rejected: Tag appears more than once:269
+20250411-02:00:27.220467000 : Message 44 Rejected: Tag appears more than once:269
+20250411-02:00:27.402110000 : Message 45 Rejected: Tag appears more than once:269
+20250411-02:00:27.403421000 : Message 46 Rejected: Tag appears more than once:269
+20250411-02:00:27.403920000 : Message 47 Rejected: Tag appears more than once:269
+20250411-02:00:27.404560000 : Message 48 Rejected: Tag appears more than once:269
+20250411-02:00:27.405256000 : Message 49 Rejected: Tag appears more than once:269
+20250411-02:00:27.406020000 : Message 50 Rejected: Tag appears more than once:269
+20250411-02:00:27.406719000 : Message 51 Rejected: Tag appears more than once:269
+20250411-02:00:27.407684000 : Message 52 Rejected: Tag appears more than once:269
+20250411-02:00:27.408701000 : Message 53 Rejected: Tag appears more than once:269
+20250411-02:00:27.409312000 : Message 54 Rejected: Tag appears more than once:269
+20250411-02:00:27.409889000 : Message 55 Rejected: Tag appears more than once:269
+20250411-02:00:27.410529000 : Message 56 Rejected: Tag appears more than once:269
+20250411-02:00:27.411314000 : Message 57 Rejected: Tag appears more than once:269
+20250411-02:00:27.412445000 : Message 58 Rejected: Tag appears more than once:269
+20250411-02:00:27.413949000 : Message 59 Rejected: Tag appears more than once:269
+20250411-02:00:27.416609000 : Message 60 Rejected: Tag appears more than once:269
+20250411-02:00:27.417687000 : Message 61 Rejected: Tag appears more than once:269
+20250411-02:00:27.418432000 : Message 62 Rejected: Tag appears more than once:269
+20250411-02:00:27.419296000 : Message 63 Rejected: Tag appears more than once:269
+20250411-02:00:27.419946000 : Message 64 Rejected: Tag appears more than once:269
+20250411-02:00:27.420576000 : Message 65 Rejected: Tag appears more than once:269
+20250411-02:00:27.421187000 : Message 66 Rejected: Tag appears more than once:269
+20250411-02:00:27.421896000 : Message 67 Rejected: Tag appears more than once:269
+20250411-02:00:27.422500000 : Message 68 Rejected: Tag appears more than once:269
+20250411-02:00:27.423106000 : Message 69 Rejected: Tag appears more than once:269
+20250411-02:00:30.984665000 : Initiated logout request
+20250411-02:06:35.174177000 : Created session
+20250411-02:06:35.208772000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-02:06:36.146207000 : Initiated logon request
+20250411-02:06:36.401138000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-02:06:36.402226000 : Received logon response
+20250411-02:06:42.957776000 : Message 150 Rejected: Tag appears more than once:269
+20250411-02:06:42.959023000 : Message 151 Rejected: Tag appears more than once:269
+20250411-02:06:42.959869000 : Message 152 Rejected: Tag appears more than once:269
+20250411-02:06:42.960793000 : Message 153 Rejected: Tag appears more than once:269
+20250411-02:06:42.961435000 : Message 154 Rejected: Tag appears more than once:269
+20250411-02:06:42.962213000 : Message 155 Rejected: Tag appears more than once:269
+20250411-02:06:42.962994000 : Message 156 Rejected: Tag appears more than once:269
+20250411-02:06:42.963848000 : Message 157 Rejected: Tag appears more than once:269
+20250411-02:06:42.975317000 : Message 158 Rejected: Tag appears more than once:269
+20250411-02:06:42.976545000 : Message 159 Rejected: Tag appears more than once:269
+20250411-02:06:42.977270000 : Message 160 Rejected: Tag appears more than once:269
+20250411-02:06:42.978057000 : Message 161 Rejected: Tag appears more than once:269
+20250411-02:06:42.979340000 : Message 162 Rejected: Tag appears more than once:269
+20250411-02:06:42.980241000 : Message 163 Rejected: Tag appears more than once:269
+20250411-02:06:42.981222000 : Message 164 Rejected: Tag appears more than once:269
+20250411-02:06:42.981972000 : Message 165 Rejected: Tag appears more than once:269
+20250411-02:06:43.086406000 : Message 166 Rejected: Tag appears more than once:269
+20250411-02:06:43.087265000 : Message 167 Rejected: Tag appears more than once:269
+20250411-02:06:43.087915000 : Message 168 Rejected: Tag appears more than once:269
+20250411-02:06:43.110410000 : Message 169 Rejected: Tag appears more than once:269
+20250411-02:06:43.111397000 : Message 170 Rejected: Tag appears more than once:269
+20250411-02:06:43.112078000 : Message 171 Rejected: Tag appears more than once:269
+20250411-02:06:43.190179000 : Message 172 Rejected: Tag appears more than once:269
+20250411-02:06:43.191294000 : Message 173 Rejected: Tag appears more than once:269
+20250411-02:06:43.191974000 : Message 174 Rejected: Tag appears more than once:269
+20250411-02:06:43.195876000 : Message 175 Rejected: Tag appears more than once:269
+20250411-02:06:43.197900000 : Message 176 Rejected: Tag appears more than once:269
+20250411-02:06:43.199023000 : Message 177 Rejected: Tag appears more than once:269
+20250411-02:06:43.199672000 : Message 178 Rejected: Tag appears more than once:269
+20250411-02:06:43.200306000 : Message 179 Rejected: Tag appears more than once:269
+20250411-02:06:43.201368000 : Message 180 Rejected: Tag appears more than once:269
+20250411-02:06:43.205103000 : Message 181 Rejected: Tag appears more than once:269
+20250411-02:06:43.213482000 : Message 182 Rejected: Tag appears more than once:269
+20250411-02:06:43.217048000 : Message 183 Rejected: Tag appears more than once:269
+20250411-02:06:43.217873000 : Message 184 Rejected: Tag appears more than once:269
+20250411-02:06:43.218568000 : Message 185 Rejected: Tag appears more than once:269
+20250411-02:06:43.219643000 : Message 186 Rejected: Tag appears more than once:269
+20250411-02:06:43.220721000 : Message 187 Rejected: Tag appears more than once:269
+20250411-02:06:43.221787000 : Message 188 Rejected: Tag appears more than once:269
+20250411-02:06:43.224537000 : Message 189 Rejected: Tag appears more than once:269
+20250411-02:06:43.225469000 : Message 190 Rejected: Tag appears more than once:269
+20250411-02:06:43.226122000 : Message 191 Rejected: Tag appears more than once:269
+20250411-02:06:43.227097000 : Message 192 Rejected: Tag appears more than once:269
+20250411-02:06:43.227978000 : Message 193 Rejected: Tag appears more than once:269
+20250411-02:07:00.399743000 : Initiated logout request
+20250411-02:07:00.630513000 : Received logout response
+20250411-02:07:00.630784000 : Disconnecting
+20250411-02:11:25.361213000 : Created session
+20250411-02:11:25.388965000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-02:11:26.224268000 : Initiated logon request
+20250411-02:11:26.478838000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-02:11:26.479897000 : Received logon response
+20250411-02:11:33.143702000 : Message 71 Rejected: Tag appears more than once:269
+20250411-02:11:33.145772000 : Message 72 Rejected: Tag appears more than once:269
+20250411-02:11:33.146825000 : Message 73 Rejected: Tag appears more than once:269
+20250411-02:11:33.147451000 : Message 74 Rejected: Tag appears more than once:269
+20250411-02:11:33.148018000 : Message 75 Rejected: Tag appears more than once:269
+20250411-02:11:33.148618000 : Message 76 Rejected: Tag appears more than once:269
+20250411-02:11:33.149121000 : Message 77 Rejected: Tag appears more than once:269
+20250411-02:11:33.149806000 : Message 78 Rejected: Tag appears more than once:269
+20250411-02:11:33.150312000 : Message 79 Rejected: Tag appears more than once:269
+20250411-02:11:33.150816000 : Message 80 Rejected: Tag appears more than once:269
+20250411-02:11:33.368490000 : Message 81 Rejected: Tag appears more than once:269
+20250411-02:11:33.374487000 : Message 82 Rejected: Tag appears more than once:269
+20250411-02:11:33.375455000 : Message 83 Rejected: Tag appears more than once:269
+20250411-02:11:33.376248000 : Message 84 Rejected: Tag appears more than once:269
+20250411-02:11:33.376992000 : Message 85 Rejected: Tag appears more than once:269
+20250411-02:11:33.377755000 : Message 86 Rejected: Tag appears more than once:269
+20250411-02:11:33.378424000 : Message 87 Rejected: Tag appears more than once:269
+20250411-02:11:33.379034000 : Message 88 Rejected: Tag appears more than once:269
+20250411-02:11:33.379649000 : Message 89 Rejected: Tag appears more than once:269
+20250411-02:11:33.380477000 : Message 90 Rejected: Tag appears more than once:269
+20250411-02:11:33.381058000 : Message 91 Rejected: Tag appears more than once:269
+20250411-02:11:33.381568000 : Message 92 Rejected: Tag appears more than once:269
+20250411-02:11:33.382137000 : Message 93 Rejected: Tag appears more than once:269
+20250411-02:11:33.382698000 : Message 94 Rejected: Tag appears more than once:269
+20250411-02:11:33.383213000 : Message 95 Rejected: Tag appears more than once:269
+20250411-02:11:33.383777000 : Message 96 Rejected: Tag appears more than once:269
+20250411-02:11:33.384559000 : Message 97 Rejected: Tag appears more than once:269
+20250411-02:11:33.385309000 : Message 98 Rejected: Tag appears more than once:269
+20250411-02:11:33.385968000 : Message 99 Rejected: Tag appears more than once:269
+20250411-02:11:33.386838000 : Message 100 Rejected: Tag appears more than once:269
+20250411-02:11:33.387476000 : Message 101 Rejected: Tag appears more than once:269
+20250411-02:11:33.388104000 : Message 102 Rejected: Tag appears more than once:269
+20250411-02:11:33.388820000 : Message 103 Rejected: Tag appears more than once:269
+20250411-02:11:33.389502000 : Message 104 Rejected: Tag appears more than once:269
+20250411-02:11:33.390143000 : Message 105 Rejected: Tag appears more than once:269
+20250411-02:11:33.390851000 : Message 106 Rejected: Tag appears more than once:269
+20250411-02:11:33.391595000 : Message 107 Rejected: Tag appears more than once:269
+20250411-02:11:33.595274000 : Message 108 Rejected: Tag appears more than once:269
+20250411-02:11:33.596502000 : Message 109 Rejected: Tag appears more than once:269
+20250411-02:11:33.597197000 : Message 110 Rejected: Tag appears more than once:269
+20250411-02:11:33.598132000 : Message 111 Rejected: Tag appears more than once:269
+20250411-02:11:33.600306000 : Message 112 Rejected: Tag appears more than once:269
+20250411-02:11:33.600923000 : Message 113 Rejected: Tag appears more than once:269
+20250411-02:11:33.601658000 : Message 114 Rejected: Tag appears more than once:269
+20250411-02:11:33.602500000 : Message 115 Rejected: Tag appears more than once:269
+20250411-02:12:29.406912000 : Created session
+20250411-02:12:29.437113000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-02:12:30.200754000 : Initiated logon request
+20250411-02:12:30.460008000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-02:12:30.461053000 : Received logon response
+20250411-02:12:37.128046000 : Initiated logout request
+20250411-02:12:37.187648000 : Message 163 Rejected: Tag appears more than once:269
+20250411-02:12:37.188799000 : Message 165 Rejected: Tag appears more than once:269
+20250411-02:12:37.190076000 : Message 168 Rejected: Tag appears more than once:269
+20250411-02:12:37.191447000 : Message 169 Rejected: Tag appears more than once:269
+20250411-02:12:37.192286000 : Message 170 Rejected: Tag appears more than once:269
+20250411-02:12:37.193150000 : Message 171 Rejected: Tag appears more than once:269
+20250411-02:12:37.194324000 : Message 172 Rejected: Tag appears more than once:269
+20250411-02:12:37.195092000 : Message 173 Rejected: Tag appears more than once:269
+20250411-02:12:37.195924000 : Message 174 Rejected: Tag appears more than once:269
+20250411-02:12:37.196729000 : Message 175 Rejected: Tag appears more than once:269
+20250411-02:12:37.197734000 : Message 176 Rejected: Tag appears more than once:269
+20250411-02:12:37.198564000 : Message 177 Rejected: Tag appears more than once:269
+20250411-02:12:37.199402000 : Message 178 Rejected: Tag appears more than once:269
+20250411-02:12:37.200374000 : Message 179 Rejected: Tag appears more than once:269
+20250411-02:12:37.201119000 : Message 180 Rejected: Tag appears more than once:269
+20250411-02:12:37.201755000 : Message 181 Rejected: Tag appears more than once:269
+20250411-02:12:37.202508000 : Message 182 Rejected: Tag appears more than once:269
+20250411-02:12:37.203537000 : Message 183 Rejected: Tag appears more than once:269
+20250411-02:12:37.204391000 : Message 184 Rejected: Tag appears more than once:269
+20250411-02:12:37.205221000 : Message 185 Rejected: Tag appears more than once:269
+20250411-02:12:37.211837000 : Message 186 Rejected: Tag appears more than once:269
+20250411-02:21:42.536795000 : Created session
+20250411-02:21:42.559196000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-02:21:43.490275000 : Initiated logon request
+20250411-02:21:43.743675000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-02:21:43.744138000 : Received logon response
+20250411-02:21:50.309045000 : Message 167 Rejected: Tag appears more than once:269
+20250411-02:21:50.311257000 : Message 168 Rejected: Tag appears more than once:269
+20250411-02:21:50.312259000 : Message 169 Rejected: Tag appears more than once:269
+20250411-02:21:50.312943000 : Message 170 Rejected: Tag appears more than once:269
+20250411-02:21:50.313602000 : Message 171 Rejected: Tag appears more than once:269
+20250411-02:21:50.314372000 : Message 172 Rejected: Tag appears more than once:269
+20250411-02:21:50.315171000 : Message 173 Rejected: Tag appears more than once:269
+20250411-02:21:50.315946000 : Message 174 Rejected: Tag appears more than once:269
+20250411-02:21:50.316561000 : Message 175 Rejected: Tag appears more than once:269
+20250411-02:21:50.317236000 : Message 176 Rejected: Tag appears more than once:269
+20250411-02:21:50.318162000 : Message 177 Rejected: Tag appears more than once:269
+20250411-02:21:50.318866000 : Message 178 Rejected: Tag appears more than once:269
+20250411-02:21:50.319598000 : Message 179 Rejected: Tag appears more than once:269
+20250411-02:21:50.320262000 : Message 180 Rejected: Tag appears more than once:269
+20250411-02:21:50.320842000 : Message 181 Rejected: Tag appears more than once:269
+20250411-02:21:50.321429000 : Message 182 Rejected: Tag appears more than once:269
+20250411-02:21:50.322091000 : Message 183 Rejected: Tag appears more than once:269
+20250411-02:21:50.411516000 : Message 184 Rejected: Tag appears more than once:269
+20250411-02:21:50.441889000 : Message 185 Rejected: Tag appears more than once:269
+20250411-02:21:50.442911000 : Message 186 Rejected: Tag appears more than once:269
+20250411-02:21:50.443865000 : Message 187 Rejected: Tag appears more than once:269
+20250411-02:21:50.500092000 : Message 188 Rejected: Tag appears more than once:269
+20250411-02:21:50.500827000 : Message 189 Rejected: Tag appears more than once:269
+20250411-02:21:50.501602000 : Message 190 Rejected: Tag appears more than once:269
+20250411-02:21:50.530758000 : Message 191 Rejected: Tag appears more than once:269
+20250411-02:21:50.532508000 : Message 192 Rejected: Tag appears more than once:269
+20250411-02:21:50.533721000 : Message 193 Rejected: Tag appears more than once:269
+20250411-02:21:50.534343000 : Message 194 Rejected: Tag appears more than once:269
+20250411-02:21:50.535241000 : Message 195 Rejected: Tag appears more than once:269
+20250411-02:21:50.536208000 : Message 196 Rejected: Tag appears more than once:269
+20250411-02:21:50.537748000 : Message 197 Rejected: Tag appears more than once:269
+20250411-02:21:50.538784000 : Message 198 Rejected: Tag appears more than once:269
+20250411-02:21:50.539826000 : Message 199 Rejected: Tag appears more than once:269
+20250411-02:21:50.540436000 : Message 200 Rejected: Tag appears more than once:269
+20250411-02:21:50.541241000 : Message 201 Rejected: Tag appears more than once:269
+20250411-02:21:50.542003000 : Message 202 Rejected: Tag appears more than once:269
+20250411-02:21:50.542620000 : Message 203 Rejected: Tag appears more than once:269
+20250411-02:21:50.543202000 : Message 204 Rejected: Tag appears more than once:269
+20250411-02:21:50.543815000 : Message 205 Rejected: Tag appears more than once:269
+20250411-02:21:50.544716000 : Message 206 Rejected: Tag appears more than once:269
+20250411-02:21:50.545783000 : Message 207 Rejected: Tag appears more than once:269
+20250411-02:21:50.546776000 : Message 208 Rejected: Tag appears more than once:269
+20250411-02:21:50.547516000 : Message 209 Rejected: Tag appears more than once:269
+20250411-02:21:50.548239000 : Message 210 Rejected: Tag appears more than once:269
+20250411-02:21:51.368982000 : Initiated logout request
+20250411-02:21:51.597175000 : Received logout response
+20250411-02:21:51.597369000 : Disconnecting

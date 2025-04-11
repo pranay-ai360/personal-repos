@@ -1,23 +1,23 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    volumes:
-      - .:/app
-    ports:
-      - "8000:8000"
-    platform: linux/amd64
-#    command: sleep infinity
-    command: python3 cb-matchingEngine-l3.py
-#    command: python3 cb-socket-l2.py
-    depends_on:
-      - redis
+#   app:
+#     build: .
+#     volumes:
+#       - .:/app
+#     ports:
+#       - "8000:8000"
+#     platform: linux/amd64
+# #    command: sleep infinity
+#     command: python3 cb-matchingEngine-l3.py
+# #    command: python3 cb-socket-l2.py
+#     depends_on:
+#       - redis
 
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
+#   redis:
+#     image: redis:alpine
+#     ports:
+#       - "6379:6379"
 
   java-service:
       image: openjdk:23

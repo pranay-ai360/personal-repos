@@ -1,2 +1,6 @@
-certifi==2024.6.2
+certifi==2025.1.31
 quickfix-ssl==1.15.1.post4
+
+
+## For webhook 
+requests==2.32.3
