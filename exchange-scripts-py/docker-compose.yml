@@ -17,11 +17,12 @@ services:
       TARGET_COMP_ID: Coinbase
     ports:
       - "9000:9000"
+      - "9001:9001"
     platform: linux/amd64
     # extra_hosts:
     #   - "host.docker.internal:host-gateway"
     command: sleep infinity
-    # command: python3 fix_md/marketdata_request_v7.py
+#    command: sh -c "cd fix_md && python3 marketdata_request_v7.py"
 
 
   # java-service:

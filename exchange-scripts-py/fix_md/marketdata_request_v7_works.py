@@ -124,7 +124,8 @@ def webhook_sender():
     from the global queue, parses them using parse_fix_message(), and if the parsed message
     is valid, sends the resulting command dict via an HTTP POST to the specified webhook URL.
     """
-    webhook_url = "https://65f7-111-220-49-33.ngrok-free.app"
+#    webhook_url = "https://65f7-111-220-49-33.ngrok-free.app"
+    webhook_url = "http://java-service:7002/orders"
     while True:
         msg = app_in_queue.get()
         if msg is None:

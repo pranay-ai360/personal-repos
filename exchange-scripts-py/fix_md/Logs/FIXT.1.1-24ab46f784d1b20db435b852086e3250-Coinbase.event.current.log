@@ -453,3 +453,51 @@
 20250411-02:25:53.417690000 : Initiated logout request
 20250411-02:25:53.647266000 : Received logout response
 20250411-02:25:53.647613000 : Disconnecting
+20250411-02:57:57.359733000 : Created session
+20250411-02:57:57.394673000 : Connecting to fix-md.sandbox.exchange.coinbase.com on port 6121 (Source :0)
+20250411-02:57:58.350918000 : Initiated logon request
+20250411-02:57:58.605436000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250411-02:57:58.606531000 : Received logon response
+20250411-02:58:05.150453000 : Message 121 Rejected: Tag appears more than once:269
+20250411-02:58:05.152082000 : Message 122 Rejected: Tag appears more than once:269
+20250411-02:58:05.152739000 : Message 123 Rejected: Tag appears more than once:269
+20250411-02:58:05.153376000 : Message 124 Rejected: Tag appears more than once:269
+20250411-02:58:05.153995000 : Message 125 Rejected: Tag appears more than once:269
+20250411-02:58:05.156504000 : Message 129 Rejected: Tag appears more than once:269
+20250411-02:58:05.157301000 : Message 130 Rejected: Tag appears more than once:269
+20250411-02:58:05.157849000 : Message 131 Rejected: Tag appears more than once:269
+20250411-02:58:05.158463000 : Message 132 Rejected: Tag appears more than once:269
+20250411-02:58:05.159019000 : Message 133 Rejected: Tag appears more than once:269
+20250411-02:58:05.159572000 : Message 134 Rejected: Tag appears more than once:269
+20250411-02:58:05.160344000 : Message 135 Rejected: Tag appears more than once:269
+20250411-02:58:05.161378000 : Message 136 Rejected: Tag appears more than once:269
+20250411-02:58:05.162799000 : Message 137 Rejected: Tag appears more than once:269
+20250411-02:58:05.163519000 : Message 138 Rejected: Tag appears more than once:269
+20250411-02:58:05.164129000 : Message 139 Rejected: Tag appears more than once:269
+20250411-02:58:05.318490000 : Message 140 Rejected: Tag appears more than once:269
+20250411-02:58:05.375119000 : Message 141 Rejected: Tag appears more than once:269
+20250411-02:58:05.377466000 : Message 142 Rejected: Tag appears more than once:269
+20250411-02:58:05.380163000 : Message 143 Rejected: Tag appears more than once:269
+20250411-02:58:05.383070000 : Message 144 Rejected: Tag appears more than once:269
+20250411-02:58:05.383823000 : Message 145 Rejected: Tag appears more than once:269
+20250411-02:58:05.385116000 : Message 146 Rejected: Tag appears more than once:269
+20250411-02:58:05.386776000 : Message 147 Rejected: Tag appears more than once:269
+20250411-02:58:05.387519000 : Message 148 Rejected: Tag appears more than once:269
+20250411-02:58:05.388264000 : Message 149 Rejected: Tag appears more than once:269
+20250411-02:58:05.389097000 : Message 150 Rejected: Tag appears more than once:269
+20250411-02:58:05.389759000 : Message 151 Rejected: Tag appears more than once:269
+20250411-02:58:05.390890000 : Message 152 Rejected: Tag appears more than once:269
+20250411-02:58:05.391625000 : Message 153 Rejected: Tag appears more than once:269
+20250411-02:58:05.392395000 : Message 154 Rejected: Tag appears more than once:269
+20250411-02:58:05.393072000 : Message 155 Rejected: Tag appears more than once:269
+20250411-02:58:05.393683000 : Message 156 Rejected: Tag appears more than once:269
+20250411-02:58:05.394532000 : Message 157 Rejected: Tag appears more than once:269
+20250411-02:58:05.395425000 : Message 158 Rejected: Tag appears more than once:269
+20250411-02:58:05.396117000 : Message 159 Rejected: Tag appears more than once:269
+20250411-02:58:05.396718000 : Message 160 Rejected: Tag appears more than once:269
+20250411-02:58:05.397607000 : Message 161 Rejected: Tag appears more than once:269
+20250411-02:58:05.398170000 : Message 162 Rejected: Tag appears more than once:269
+20250411-02:58:05.398644000 : Message 163 Rejected: Tag appears more than once:269
+20250411-02:58:05.399164000 : Message 164 Rejected: Tag appears more than once:269
+20250411-02:58:05.399623000 : Message 165 Rejected: Tag appears more than once:269
+20250411-02:58:05.400104000 : Message 166 Rejected: Tag appears more than once:269
