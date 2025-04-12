@@ -22,3 +22,7 @@ socket/node_modules
 socket-lua-python/__pycache__/
 __pycache__
 go.sum
+exchange-scripts-py/fix/Logs
+exchange-scripts-py/fix/.sessions
+/exchange-scripts-py/fix/.sessions
+/exchange-scripts-py/fix/Logs
