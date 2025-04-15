@@ -1,0 +1,6 @@
+influxdb-client>=1.34.0
+fastapi
+uvicorn
+pydantic
+python-dotenv
+pandas
