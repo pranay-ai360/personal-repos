@@ -1,0 +1,393 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+time="2025-04-15T12:36:20+10:00" level=info msg="[Init Context] Loaded 579 data points from CSV." source=console
+     execution: local
+        script: load_test.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 2 max VUs, 1m5s max duration (incl. graceful stop):
+              * default: Up to 2 looping VUs for 35s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+time="2025-04-15T12:36:20+10:00" level=info msg="VU 2 Iter 0: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:20+10:00" level=info msg="VU 2 Iter 0: Request Payload: {\"DateTime_UTC\":\"2024-12-10T03:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":34.89045382}" source=console
+time="2025-04-15T12:36:20+10:00" level=info msg="VU 2 Iter 0: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:20+10:00" level=info msg="VU 2 Iter 0: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-10T03:00:00Z\"}" source=console
+
+running (0m01.0s), 1/2 VUs, 0 complete and 0 interrupted iterations
+default   [   3% ] 1/2 VUs  01.0s/35.0s
+time="2025-04-15T12:36:21+10:00" level=info msg="VU 2 Iter 1: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:21+10:00" level=info msg="VU 2 Iter 1: Request Payload: {\"DateTime_UTC\":\"2024-11-23T23:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":128.0229174}" source=console
+time="2025-04-15T12:36:21+10:00" level=info msg="VU 2 Iter 1: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:21+10:00" level=info msg="VU 2 Iter 1: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-23T23:00:00Z\"}" source=console
+
+running (0m02.0s), 1/2 VUs, 1 complete and 0 interrupted iterations
+default   [   6% ] 1/2 VUs  02.0s/35.0s
+time="2025-04-15T12:36:22+10:00" level=info msg="VU 2 Iter 2: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:22+10:00" level=info msg="VU 2 Iter 2: Request Payload: {\"DateTime_UTC\":\"2024-12-07T19:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":72.62308048}" source=console
+time="2025-04-15T12:36:22+10:00" level=info msg="VU 2 Iter 2: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:22+10:00" level=info msg="VU 2 Iter 2: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-07T19:00:00Z\"}" source=console
+
+running (0m03.0s), 1/2 VUs, 2 complete and 0 interrupted iterations
+default   [   9% ] 1/2 VUs  03.0s/35.0s
+time="2025-04-15T12:36:23+10:00" level=info msg="VU 2 Iter 3: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:23+10:00" level=info msg="VU 2 Iter 3: Request Payload: {\"DateTime_UTC\":\"2024-11-26T00:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":166.1981416}" source=console
+time="2025-04-15T12:36:23+10:00" level=info msg="VU 2 Iter 3: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:23+10:00" level=info msg="VU 2 Iter 3: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-26T00:00:00Z\"}" source=console
+
+running (0m04.0s), 1/2 VUs, 3 complete and 0 interrupted iterations
+default   [  11% ] 1/2 VUs  04.0s/35.0s
+time="2025-04-15T12:36:24+10:00" level=info msg="VU 2 Iter 4: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:24+10:00" level=info msg="VU 2 Iter 4: Request Payload: {\"DateTime_UTC\":\"2024-12-11T08:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":21.08766385}" source=console
+time="2025-04-15T12:36:24+10:00" level=info msg="VU 2 Iter 4: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:24+10:00" level=info msg="VU 2 Iter 4: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T08:00:00Z\"}" source=console
+
+running (0m05.0s), 1/2 VUs, 4 complete and 0 interrupted iterations
+default   [  14% ] 1/2 VUs  05.0s/35.0s
+time="2025-04-15T12:36:25+10:00" level=info msg="VU 2 Iter 5: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:25+10:00" level=info msg="VU 2 Iter 5: Request Payload: {\"DateTime_UTC\":\"2024-12-01T20:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":111.5527437}" source=console
+time="2025-04-15T12:36:25+10:00" level=info msg="VU 2 Iter 5: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:25+10:00" level=info msg="VU 2 Iter 5: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-01T20:00:00Z\"}" source=console
+
+running (0m06.0s), 1/2 VUs, 5 complete and 0 interrupted iterations
+default   [  17% ] 1/2 VUs  06.0s/35.0s
+time="2025-04-15T12:36:26+10:00" level=info msg="VU 2 Iter 6: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:26+10:00" level=info msg="VU 2 Iter 6: Request Payload: {\"DateTime_UTC\":\"2024-12-11T08:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":21.08766385}" source=console
+time="2025-04-15T12:36:26+10:00" level=info msg="VU 2 Iter 6: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:26+10:00" level=info msg="VU 2 Iter 6: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T08:00:00Z\"}" source=console
+
+running (0m07.0s), 1/2 VUs, 6 complete and 0 interrupted iterations
+default   [  20% ] 1/2 VUs  07.0s/35.0s
+time="2025-04-15T12:36:27+10:00" level=info msg="VU 2 Iter 7: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:27+10:00" level=info msg="VU 2 Iter 7: Request Payload: {\"DateTime_UTC\":\"2024-12-13T19:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":19.67291052}" source=console
+time="2025-04-15T12:36:27+10:00" level=info msg="VU 2 Iter 7: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:27+10:00" level=info msg="VU 2 Iter 7: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-13T19:00:00Z\"}" source=console
+
+running (0m08.0s), 1/2 VUs, 7 complete and 0 interrupted iterations
+default   [  23% ] 1/2 VUs  08.0s/35.0s
+time="2025-04-15T12:36:28+10:00" level=info msg="VU 2 Iter 8: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:28+10:00" level=info msg="VU 2 Iter 8: Request Payload: {\"DateTime_UTC\":\"2024-11-21T22:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":117.7995461}" source=console
+time="2025-04-15T12:36:28+10:00" level=info msg="VU 2 Iter 8: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:28+10:00" level=info msg="VU 2 Iter 8: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-21T22:00:00Z\"}" source=console
+
+running (0m09.0s), 1/2 VUs, 8 complete and 0 interrupted iterations
+default   [  26% ] 1/2 VUs  09.0s/35.0s
+time="2025-04-15T12:36:29+10:00" level=info msg="VU 2 Iter 9: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:29+10:00" level=info msg="VU 2 Iter 9: Request Payload: {\"DateTime_UTC\":\"2024-12-12T05:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":22.3288153}" source=console
+time="2025-04-15T12:36:29+10:00" level=info msg="VU 2 Iter 9: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:29+10:00" level=info msg="VU 2 Iter 9: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-12T05:00:00Z\"}" source=console
+
+running (0m10.0s), 1/2 VUs, 9 complete and 0 interrupted iterations
+default   [  29% ] 1/2 VUs  10.0s/35.0s
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 1 Iter 0: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 1 Iter 0: Request Payload: {\"DateTime_UTC\":\"2024-11-26T03:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":145.0311463}" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 1 Iter 0: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 1 Iter 0: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-26T03:00:00Z\"}" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 2 Iter 10: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 2 Iter 10: Request Payload: {\"DateTime_UTC\":\"2024-12-10T12:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":32.85484397}" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 2 Iter 10: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:30+10:00" level=info msg="VU 2 Iter 10: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-10T12:00:00Z\"}" source=console
+
+running (0m11.0s), 2/2 VUs, 10 complete and 0 interrupted iterations
+default   [  31% ] 2/2 VUs  11.0s/35.0s
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 1 Iter 1: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 1 Iter 1: Request Payload: {\"DateTime_UTC\":\"2024-11-27T07:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":173.1450141}" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 1 Iter 1: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 1 Iter 1: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-27T07:00:00Z\"}" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 2 Iter 11: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 2 Iter 11: Request Payload: {\"DateTime_UTC\":\"2024-12-11T03:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":24.36559683}" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 2 Iter 11: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:31+10:00" level=info msg="VU 2 Iter 11: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T03:00:00Z\"}" source=console
+
+running (0m12.0s), 2/2 VUs, 12 complete and 0 interrupted iterations
+default   [  34% ] 2/2 VUs  12.0s/35.0s
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 1 Iter 2: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 1 Iter 2: Request Payload: {\"DateTime_UTC\":\"2024-12-02T17:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":95.17230184}" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 1 Iter 2: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 1 Iter 2: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-02T17:00:00Z\"}" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 2 Iter 12: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 2 Iter 12: Request Payload: {\"DateTime_UTC\":\"2024-11-22T06:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":84.99268351}" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 2 Iter 12: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:32+10:00" level=info msg="VU 2 Iter 12: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-22T06:00:00Z\"}" source=console
+
+running (0m13.0s), 2/2 VUs, 14 complete and 0 interrupted iterations
+default   [  37% ] 2/2 VUs  13.0s/35.0s
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 1 Iter 3: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 1 Iter 3: Request Payload: {\"DateTime_UTC\":\"2024-12-11T20:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":21.25835139}" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 1 Iter 3: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 1 Iter 3: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T20:00:00Z\"}" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 2 Iter 13: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 2 Iter 13: Request Payload: {\"DateTime_UTC\":\"2024-11-26T23:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":151.7806913}" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 2 Iter 13: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:33+10:00" level=info msg="VU 2 Iter 13: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-26T23:00:00Z\"}" source=console
+
+running (0m14.0s), 2/2 VUs, 16 complete and 0 interrupted iterations
+default   [  40% ] 2/2 VUs  14.0s/35.0s
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 1 Iter 4: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 1 Iter 4: Request Payload: {\"DateTime_UTC\":\"2024-12-06T13:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":96.77439849}" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 1 Iter 4: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 1 Iter 4: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-06T13:00:00Z\"}" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 2 Iter 14: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 2 Iter 14: Request Payload: {\"DateTime_UTC\":\"2024-11-29T16:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":142.0582095}" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 2 Iter 14: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:34+10:00" level=info msg="VU 2 Iter 14: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-29T16:00:00Z\"}" source=console
+
+running (0m15.0s), 2/2 VUs, 18 complete and 0 interrupted iterations
+default   [  43% ] 2/2 VUs  15.0s/35.0s
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 1 Iter 5: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 1 Iter 5: Request Payload: {\"DateTime_UTC\":\"2024-11-27T20:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":200.1820531}" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 1 Iter 5: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 1 Iter 5: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-27T20:00:00Z\"}" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 2 Iter 15: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 2 Iter 15: Request Payload: {\"DateTime_UTC\":\"2024-11-24T04:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":117.4615675}" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 2 Iter 15: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:35+10:00" level=info msg="VU 2 Iter 15: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-24T04:00:00Z\"}" source=console
+
+running (0m16.0s), 2/2 VUs, 20 complete and 0 interrupted iterations
+default   [  46% ] 2/2 VUs  16.0s/35.0s
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 1 Iter 6: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 1 Iter 6: Request Payload: {\"DateTime_UTC\":\"2024-12-01T11:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":86.82839312}" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 1 Iter 6: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 1 Iter 6: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-01T11:00:00Z\"}" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 2 Iter 16: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 2 Iter 16: Request Payload: {\"DateTime_UTC\":\"2024-11-20T22:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":102}" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 2 Iter 16: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:36+10:00" level=info msg="VU 2 Iter 16: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-20T22:00:00Z\"}" source=console
+
+running (0m17.0s), 2/2 VUs, 22 complete and 0 interrupted iterations
+default   [  49% ] 2/2 VUs  17.0s/35.0s
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 1 Iter 7: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 1 Iter 7: Request Payload: {\"DateTime_UTC\":\"2024-12-04T10:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":106.3415685}" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 1 Iter 7: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 1 Iter 7: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-04T10:00:00Z\"}" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 2 Iter 17: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 2 Iter 17: Request Payload: {\"DateTime_UTC\":\"2024-11-22T22:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":82.1380059}" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 2 Iter 17: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:37+10:00" level=info msg="VU 2 Iter 17: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-22T22:00:00Z\"}" source=console
+
+running (0m18.0s), 2/2 VUs, 24 complete and 0 interrupted iterations
+default   [  51% ] 2/2 VUs  18.0s/35.0s
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 1 Iter 8: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 1 Iter 8: Request Payload: {\"DateTime_UTC\":\"2024-12-12T10:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":20.57991754}" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 1 Iter 8: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 1 Iter 8: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-12T10:00:00Z\"}" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 2 Iter 18: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 2 Iter 18: Request Payload: {\"DateTime_UTC\":\"2024-11-23T04:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":101.1438263}" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 2 Iter 18: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:38+10:00" level=info msg="VU 2 Iter 18: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-23T04:00:00Z\"}" source=console
+
+running (0m19.0s), 2/2 VUs, 26 complete and 0 interrupted iterations
+default   [  54% ] 2/2 VUs  19.0s/35.0s
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 1 Iter 9: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 1 Iter 9: Request Payload: {\"DateTime_UTC\":\"2024-11-25T21:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":158.2550063}" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 1 Iter 9: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 1 Iter 9: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-25T21:00:00Z\"}" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 2 Iter 19: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 2 Iter 19: Request Payload: {\"DateTime_UTC\":\"2024-12-05T07:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":115.8473143}" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 2 Iter 19: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:39+10:00" level=info msg="VU 2 Iter 19: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-05T07:00:00Z\"}" source=console
+
+running (0m20.0s), 2/2 VUs, 28 complete and 0 interrupted iterations
+default   [  57% ] 2/2 VUs  20.0s/35.0s
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 1 Iter 10: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 1 Iter 10: Request Payload: {\"DateTime_UTC\":\"2024-12-10T13:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":30.22645645}" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 1 Iter 10: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 1 Iter 10: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-10T13:00:00Z\"}" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 2 Iter 20: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 2 Iter 20: Request Payload: {\"DateTime_UTC\":\"2024-11-30T23:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":113.1625191}" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 2 Iter 20: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:40+10:00" level=info msg="VU 2 Iter 20: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-30T23:00:00Z\"}" source=console
+
+running (0m21.0s), 2/2 VUs, 30 complete and 0 interrupted iterations
+default   [  60% ] 2/2 VUs  21.0s/35.0s
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 1 Iter 11: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 1 Iter 11: Request Payload: {\"DateTime_UTC\":\"2024-12-05T01:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":116.5868947}" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 1 Iter 11: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 1 Iter 11: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-05T01:00:00Z\"}" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 2 Iter 21: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 2 Iter 21: Request Payload: {\"DateTime_UTC\":\"2024-12-06T07:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":111.7952764}" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 2 Iter 21: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:41+10:00" level=info msg="VU 2 Iter 21: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-06T07:00:00Z\"}" source=console
+
+running (0m22.0s), 2/2 VUs, 32 complete and 0 interrupted iterations
+default   [  63% ] 2/2 VUs  22.0s/35.0s
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 1 Iter 12: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 1 Iter 12: Request Payload: {\"DateTime_UTC\":\"2024-11-20T11:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":101}" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 1 Iter 12: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 1 Iter 12: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-20T11:00:00Z\"}" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 2 Iter 22: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 2 Iter 22: Request Payload: {\"DateTime_UTC\":\"2024-12-07T08:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":82.98464576}" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 2 Iter 22: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:42+10:00" level=info msg="VU 2 Iter 22: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-07T08:00:00Z\"}" source=console
+
+running (0m23.0s), 2/2 VUs, 34 complete and 0 interrupted iterations
+default   [  66% ] 2/2 VUs  23.0s/35.0s
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 1 Iter 13: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 1 Iter 13: Request Payload: {\"DateTime_UTC\":\"2024-12-01T18:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":103.2226739}" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 1 Iter 13: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 1 Iter 13: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-01T18:00:00Z\"}" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 2 Iter 23: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 2 Iter 23: Request Payload: {\"DateTime_UTC\":\"2024-12-12T12:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":19.90489624}" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 2 Iter 23: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:43+10:00" level=info msg="VU 2 Iter 23: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-12T12:00:00Z\"}" source=console
+
+running (0m24.0s), 2/2 VUs, 36 complete and 0 interrupted iterations
+default   [  69% ] 2/2 VUs  24.0s/35.0s
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 1 Iter 14: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 1 Iter 14: Request Payload: {\"DateTime_UTC\":\"2024-11-26T23:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":151.7806913}" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 1 Iter 14: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 1 Iter 14: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-26T23:00:00Z\"}" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 2 Iter 24: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 2 Iter 24: Request Payload: {\"DateTime_UTC\":\"2024-12-03T08:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":94.57042407}" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 2 Iter 24: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:44+10:00" level=info msg="VU 2 Iter 24: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-03T08:00:00Z\"}" source=console
+
+running (0m25.0s), 2/2 VUs, 38 complete and 0 interrupted iterations
+default   [  71% ] 2/2 VUs  25.0s/35.0s
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 1 Iter 15: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 1 Iter 15: Request Payload: {\"DateTime_UTC\":\"2024-12-07T12:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":88.65436422}" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 1 Iter 15: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 1 Iter 15: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-07T12:00:00Z\"}" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 2 Iter 25: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 2 Iter 25: Request Payload: {\"DateTime_UTC\":\"2024-11-28T20:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":198.4396577}" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 2 Iter 25: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:45+10:00" level=info msg="VU 2 Iter 25: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-28T20:00:00Z\"}" source=console
+
+running (0m26.0s), 2/2 VUs, 40 complete and 0 interrupted iterations
+default   [  74% ] 2/2 VUs  26.0s/35.0s
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 1 Iter 16: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 1 Iter 16: Request Payload: {\"DateTime_UTC\":\"2024-12-01T20:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":111.5527437}" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 1 Iter 16: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 1 Iter 16: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-01T20:00:00Z\"}" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 2 Iter 26: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 2 Iter 26: Request Payload: {\"DateTime_UTC\":\"2024-12-12T16:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":20.33597658}" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 2 Iter 26: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:46+10:00" level=info msg="VU 2 Iter 26: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-12T16:00:00Z\"}" source=console
+
+running (0m27.0s), 2/2 VUs, 42 complete and 0 interrupted iterations
+default   [  77% ] 2/2 VUs  27.0s/35.0s
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 1 Iter 17: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 1 Iter 17: Request Payload: {\"DateTime_UTC\":\"2024-12-11T08:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":21.08766385}" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 1 Iter 17: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 1 Iter 17: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T08:00:00Z\"}" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 2 Iter 27: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 2 Iter 27: Request Payload: {\"DateTime_UTC\":\"2024-12-11T04:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":25.82753264}" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 2 Iter 27: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:47+10:00" level=info msg="VU 2 Iter 27: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T04:00:00Z\"}" source=console
+
+running (0m28.0s), 2/2 VUs, 44 complete and 0 interrupted iterations
+default   [  80% ] 2/2 VUs  28.0s/35.0s
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 1 Iter 18: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 1 Iter 18: Request Payload: {\"DateTime_UTC\":\"2024-12-12T22:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":21.32593662}" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 1 Iter 18: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 1 Iter 18: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-12T22:00:00Z\"}" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 2 Iter 28: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 2 Iter 28: Request Payload: {\"DateTime_UTC\":\"2024-11-21T14:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":116.8055483}" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 2 Iter 28: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:48+10:00" level=info msg="VU 2 Iter 28: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-21T14:00:00Z\"}" source=console
+
+running (0m29.0s), 2/2 VUs, 46 complete and 0 interrupted iterations
+default   [  83% ] 2/2 VUs  29.0s/35.0s
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 1 Iter 19: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 1 Iter 19: Request Payload: {\"DateTime_UTC\":\"2024-12-11T06:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":26.0341529}" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 1 Iter 19: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 1 Iter 19: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-11T06:00:00Z\"}" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 2 Iter 29: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 2 Iter 29: Request Payload: {\"DateTime_UTC\":\"2024-11-23T04:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":101.1438263}" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 2 Iter 29: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:49+10:00" level=info msg="VU 2 Iter 29: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-23T04:00:00Z\"}" source=console
+
+running (0m30.0s), 2/2 VUs, 48 complete and 0 interrupted iterations
+default   [  86% ] 2/2 VUs  30.0s/35.0s
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 1 Iter 20: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 1 Iter 20: Request Payload: {\"DateTime_UTC\":\"2024-11-24T03:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":114.0403568}" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 1 Iter 20: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 1 Iter 20: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-24T03:00:00Z\"}" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 2 Iter 30: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 2 Iter 30: Request Payload: {\"DateTime_UTC\":\"2024-12-02T16:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":87.31403838}" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 2 Iter 30: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:50+10:00" level=info msg="VU 2 Iter 30: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-02T16:00:00Z\"}" source=console
+
+running (0m31.0s), 2/2 VUs, 50 complete and 0 interrupted iterations
+default   [  89% ] 2/2 VUs  31.0s/35.0s
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 1 Iter 21: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 1 Iter 21: Request Payload: {\"DateTime_UTC\":\"2024-11-22T17:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":92.89883128}" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 1 Iter 21: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 1 Iter 21: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-22T17:00:00Z\"}" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 2 Iter 31: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 2 Iter 31: Request Payload: {\"DateTime_UTC\":\"2024-11-22T23:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":88.70904637}" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 2 Iter 31: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:51+10:00" level=info msg="VU 2 Iter 31: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-22T23:00:00Z\"}" source=console
+
+running (0m32.0s), 2/2 VUs, 52 complete and 0 interrupted iterations
+default   [  91% ] 2/2 VUs  32.0s/35.0s
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 1 Iter 22: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 1 Iter 22: Request Payload: {\"DateTime_UTC\":\"2024-11-30T13:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":113.0776926}" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 1 Iter 22: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 1 Iter 22: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-30T13:00:00Z\"}" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 2 Iter 32: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 2 Iter 32: Request Payload: {\"DateTime_UTC\":\"2024-12-10T22:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":25.81695259}" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 2 Iter 32: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:52+10:00" level=info msg="VU 2 Iter 32: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-12-10T22:00:00Z\"}" source=console
+
+running (0m33.0s), 2/2 VUs, 54 complete and 0 interrupted iterations
+default   [  94% ] 2/2 VUs  33.0s/35.0s
+time="2025-04-15T12:36:53+10:00" level=info msg="VU 2 Iter 33: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:53+10:00" level=info msg="VU 2 Iter 33: Request Payload: {\"DateTime_UTC\":\"2024-11-25T13:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":133.688027}" source=console
+time="2025-04-15T12:36:53+10:00" level=info msg="VU 2 Iter 33: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:53+10:00" level=info msg="VU 2 Iter 33: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-25T13:00:00Z\"}" source=console
+
+running (0m34.0s), 1/2 VUs, 56 complete and 0 interrupted iterations
+default   [  97% ] 1/2 VUs  34.0s/35.0s
+time="2025-04-15T12:36:54+10:00" level=info msg="VU 2 Iter 34: Sending Request to /write_ticker for SOL-PHP" source=console
+time="2025-04-15T12:36:54+10:00" level=info msg="VU 2 Iter 34: Request Payload: {\"DateTime_UTC\":\"2024-11-22T18:00:00Z\",\"TICKER_ID\":\"SOL-PHP\",\"PRICE\":94.75680791}" source=console
+time="2025-04-15T12:36:55+10:00" level=info msg="VU 2 Iter 34: Received Response for /write_ticker (SOL-PHP) - Status: 200" source=console
+time="2025-04-15T12:36:55+10:00" level=info msg="VU 2 Iter 34: Response Body: {\"status\":\"success\",\"message\":\"Inserted data for SOL-PHP at 2024-11-22T18:00:00Z\"}" source=console
+
+running (0m35.0s), 1/2 VUs, 57 complete and 0 interrupted iterations
+default   [ 100% ] 1/2 VUs  35.0s/35.0s
+
+
+  █ THRESHOLDS 
+
+    http_req_duration
+    ✓ 'p(95)<500' p(95)=17.2ms
+
+    http_req_failed
+    ✓ 'rate<0.01' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......................: 116     3.27034/s
+    checks_succeeded...................: 100.00% 116 out of 116
+    checks_failed......................: 0.00%   0 out of 116
+
+    ✓ status is 200
+    ✓ response body contains success
+
+    HTTP
+    http_req_duration.......................................................: avg=10.69ms min=3.8ms med=9.72ms max=35.25ms p(90)=16.05ms p(95)=17.2ms
+      { expected_response:true }............................................: avg=10.69ms min=3.8ms med=9.72ms max=35.25ms p(90)=16.05ms p(95)=17.2ms
+    http_req_failed.........................................................: 0.00% 0 out of 58
+    http_reqs...............................................................: 58    1.63517/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=1.01s   min=1s    med=1.01s  max=1.03s   p(90)=1.01s   p(95)=1.01s 
+    iterations..............................................................: 58    1.63517/s
+    vus.....................................................................: 1     min=1       max=2
+    vus_max.................................................................: 2     min=2       max=2
+
+    NETWORK
+    data_received...........................................................: 14 kB 402 B/s
+    data_sent...............................................................: 13 kB 374 B/s
+
+
+
+
+running (0m35.5s), 0/2 VUs, 58 complete and 0 interrupted iterations
+default ✓ [ 100% ] 0/2 VUs  35s
