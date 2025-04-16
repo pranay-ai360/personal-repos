@@ -1,0 +1,12 @@
+# Dockerfile.InfluxDB
+# Use the official InfluxDB v2 image
+FROM influxdb:2.7
+
+# No further customization needed in the Dockerfile itself for basic setup.
+# Configuration (user, org, bucket, token) is done via environment
+# variables passed during 'docker run' or in 'docker-compose.yml'.
+# The entrypoint script in the official image handles the setup.
+# Data persistence is managed via Docker volumes.
+
+# Standard InfluxDB port
+EXPOSE 8086
